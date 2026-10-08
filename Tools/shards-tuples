@@ -7,16 +7,21 @@
 # (GH_TUPLE) extraite dans lib/<nom>.
 #
 # Usage :
-#   Tools/shards-tuples COMPTE/PROJET COMMIT VERSION PORT
+#   Tools/shards-tuples COMPTE/PROJET COMMIT PORT
 #
 #   COMPTE/PROJET  dépôt GitHub du projet (ex. aloli-crystal/partiduo-dist)
 #   COMMIT         commit du projet à construire (empreinte complète)
-#   VERSION        DISTVERSION du port (ex. 0.1.0)
 #   PORT           répertoire du port (ex. finance/partiduo-app-devel)
+#
+# La version du paquet (DISTVERSION) est celle du shard.yml du projet à ce
+# commit : chaque commit d'un dépôt Partiduo en relève le dernier chiffre,
+# le paquet porte donc le numéro du programme. Une version qui ne monte pas
+# par rapport à celle du port est refusée (pkg upgrade ne verrait pas le
+# nouveau paquet) : publiez d'abord un commit du projet.
 #
 # Lit le shard.lock du projet à ce commit, résout chaque version en commit
 # (git ls-remote), puis écrit dans PORT :
-#   Makefile.shards  GH_TAGNAME du projet et GH_TUPLE des shards ;
+#   Makefile.shards  DISTVERSION, GH_TAGNAME du projet et GH_TUPLE des shards ;
 #   distinfo         empreintes et tailles des archives (téléchargées dans
 #                    ${SHARDS_TUPLES_CACHE:-~/.cache/aloli-ports/distfiles}).
 #
@@ -24,7 +29,7 @@
 # dépôt au commit, par exemple le lock d'empaquetage d'un projet qui déclare
 # ses shards maison en path: (Tools/packaging-lock) :
 #   SHARDS_TUPLES_LOCK=finance/partiduo-admin-devel/shard.lock.packaging \
-#     Tools/shards-tuples aloli-crystal/partiduo-admin <commit> <version> finance/partiduo-admin-devel
+#     Tools/shards-tuples aloli-crystal/partiduo-admin <commit> finance/partiduo-admin-devel
 # L'archive principale reste celle du projet au COMMIT donné.
 #
 # Seuls git, curl, awk et sha256sum (ou shasum, ou sha256) sont requis :
@@ -37,11 +42,10 @@ die() {
   exit 1
 }
 
-[ $# -eq 4 ] || die "usage : Tools/shards-tuples COMPTE/PROJET COMMIT VERSION PORT"
+[ $# -eq 3 ] || die "usage : Tools/shards-tuples COMPTE/PROJET COMMIT PORT"
 REPO="$1"
 COMMIT="$2"
-VERSION="$3"
-PORT="$4"
+PORT="$3"
 
 case "$COMMIT" in
   *[!0-9a-f]* | "") die "COMMIT : empreinte hexadécimale attendue ($COMMIT)" ;;
@@ -89,6 +93,34 @@ resolve() {
   esac
 }
 
+# Version du projet au commit : `version:` de son shard.yml.
+SHARD_YML=$(curl -fsSL "https://raw.githubusercontent.com/$REPO/$COMMIT/shard.yml") ||
+  die "shard.yml introuvable pour $REPO $COMMIT (commit publié ?)"
+VERSION=$(echo "$SHARD_YML" | awk '/^version:/ { print $2; exit }')
+case "$VERSION" in
+  "" | .* | *. | *..* | *[!0-9.]*) die "version de shard.yml invalide pour $REPO $COMMIT : « $VERSION »" ;;
+esac
+
+# Version et commit actuels du port : hormis le rejeu du même commit à la
+# même version, la version doit monter (comparaison de pkg : nombres, point
+# par point).
+if [ -f "$PORT/Makefile.shards" ]; then
+  current=$(awk '/^DISTVERSION=/ { print $2; exit }' "$PORT/Makefile.shards")
+  current_commit=$(awk '/^GH_TAGNAME=/ { print $2; exit }' "$PORT/Makefile.shards")
+  if [ -n "$current" ] && { [ "$current_commit" != "$COMMIT" ] || [ "$current" != "$VERSION" ]; }; then
+    higher=$(awk -v a="$VERSION" -v b="$current" 'BEGIN {
+      n = split(a, x, "."); m = split(b, y, ".")
+      for (i = 1; i <= (n > m ? n : m); i++) {
+        if (x[i] + 0 > y[i] + 0) { print 1; exit }
+        if (x[i] + 0 < y[i] + 0) { print 0; exit }
+      }
+      print 0
+    }')
+    [ "$higher" = 1 ] ||
+      die "version $VERSION de $REPO $COMMIT pas plus haute que celle du port ($current) : pkg upgrade ne la verrait pas"
+  fi
+fi
+
 if [ -n "${SHARDS_TUPLES_LOCK:-}" ]; then
   [ -r "$SHARDS_TUPLES_LOCK" ] || die "shard.lock local illisible : $SHARDS_TUPLES_LOCK"
   LOCK=$(cat "$SHARDS_TUPLES_LOCK")
@@ -119,7 +151,7 @@ SHA256 ($DIST_SUBDIR/$1) = $(sha256 "$2")
 SIZE ($DIST_SUBDIR/$1) = $(wc -c <"$2" | tr -d ' ')"
 }
 
-echo "== $REPO $COMMIT"
+echo "== $REPO $COMMIT (version $VERSION)"
 add_distinfo "$MAIN_FILE" "$(fetch "$ACCOUNT" "$PROJECT" "$COMMIT" "$MAIN_FILE")"
 
 echo "$ENTRIES" | while read -r name url version; do
@@ -147,8 +179,9 @@ rm -f "$CACHE/.tuples.$$"
 
 {
   echo "# Produit par Tools/shards-tuples ($REPO, $LOCK_SOURCE) — ne pas modifier à la main."
+  echo "DISTVERSION=	$VERSION"
   echo "GH_TAGNAME=	$COMMIT"
   printf 'GH_TUPLE=	\\\n%s' "$TUPLES" | sed '$ s/ \\$//'
 } >"$PORT/Makefile.shards"
 echo "$DISTINFO" >"$PORT/distinfo"
-echo "== $PORT : Makefile.shards et distinfo ($count shards)"
+echo "== $PORT : Makefile.shards et distinfo (version $VERSION, $count shards)"

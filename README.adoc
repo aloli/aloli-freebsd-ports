@@ -112,7 +112,7 @@ d'installation) par `partiduo-agent`.
 
 *Sources partagées* : l'administration et l'exécutant sont construits depuis
 le même projet (`aloli-crystal/partiduo-admin`) et les mêmes shards. Les
-sources d'une branche (`Makefile.version`, `Makefile.shards`, `distinfo`,
+sources d'une branche (`Makefile.shards`, `distinfo`,
 `shard.lock.packaging`) ne sont rangées qu'une fois, dans
 `finance/partiduo-admin` (production) et `finance/partiduo-admin-devel`
 (development) ; `sysutils/partiduo-agent[-devel]` les lisent là
@@ -124,18 +124,27 @@ qui ne peuvent pas diverger.
 poudriere construit sans réseau. Chaque shard du `shard.lock` du projet
 devient une archive GitHub (`GH_TUPLE`) extraite dans `lib/<nom>`.
 `Tools/shards-tuples` lit le `shard.lock` publié, résout chaque version en
-commit, télécharge les archives et écrit `Makefile.shards` et `distinfo` du
-port :
+commit, télécharge les archives et écrit `Makefile.shards` (version,
+commit du projet, archives des shards) et `distinfo` du port :
 
 [source,sh]
 ----
 # après publication du commit de partiduo-dist à construire :
-Tools/shards-tuples aloli-crystal/partiduo-dist <commit complet> 0.1.0.20260930 finance/partiduo-app-devel
+Tools/shards-tuples aloli-crystal/partiduo-dist <commit complet> finance/partiduo-app-devel
 ----
 
-La version passée doit être le `DISTVERSION` du port (elle entre dans le nom
-de l'archive principale). Les `shard.lock` ne doivent contenir aucune
-dépendance `path:` : l'outil les refuse.
+*Version du paquet* : `DISTVERSION` est la `version:` du `shard.yml` du
+projet au commit donné. Chaque commit d'un dépôt Partiduo en relève le
+dernier chiffre (règle commune du 8 octobre 2026) : le paquet porte le
+numéro du programme, sans réglage à la main. L'outil refuse un autre
+commit dont la version ne monte pas par rapport à celle du port, car
+`pkg upgrade` ne verrait pas le nouveau paquet : publiez d'abord un commit
+du projet (pour `partiduo-dist`, la mise à jour de son lock en est un).
+Les versions datées antérieures (`0.1.0.20261008`) sont plus basses que
+`0.1.1` : le passage se fait sans retour en arrière.
+
+Les `shard.lock` ne doivent contenir aucune dépendance `path:` : l'outil
+les refuse.
 
 `SHARDS_TUPLES_LOCK=<fichier>` fait lire un `shard.lock` local au lieu de
 celui du dépôt au commit (l'archive principale reste celle du commit).
@@ -158,8 +167,7 @@ autre forme de `path:` est refusée.
 C=$(git ls-remote https://github.com/aloli-crystal/partiduo-admin refs/heads/development | cut -f1)
 Tools/packaging-lock aloli-crystal/partiduo-admin $C finance/partiduo-admin-devel/shard.lock.packaging
 SHARDS_TUPLES_LOCK=finance/partiduo-admin-devel/shard.lock.packaging \
-  Tools/shards-tuples aloli-crystal/partiduo-admin $C 0.1.0.20260930 finance/partiduo-admin-devel
-# puis la même version dans finance/partiduo-admin-devel/Makefile.version
+  Tools/shards-tuples aloli-crystal/partiduo-admin $C finance/partiduo-admin-devel
 ----
 
 Ces sources servent aussi à `sysutils/partiduo-agent-devel` (voir plus

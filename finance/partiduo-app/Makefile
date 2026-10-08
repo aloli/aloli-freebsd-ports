@@ -1,5 +1,4 @@
 PORTNAME=	partiduo-app
-DISTVERSION?=	0.1.0
 PORTREVISION=	1
 CATEGORIES=	finance
 DIST_SUBDIR=	partiduo

@@ -35,12 +35,11 @@ SUB_FILES=	pkg-message
 SUB_LIST=	PKGNAME=${PKGBASE}
 
 # Sources : celles du port finance/partiduo-admin de la même branche (même
-# projet, mêmes shards : Makefile.version, Makefile.shards, distinfo), pour
+# projet, mêmes shards : Makefile.shards, distinfo), pour
 # qu'une seule génération (Tools/packaging-lock, Tools/shards-tuples) serve
 # l'administration et l'exécutant.
 PARTIDUO_ADMIN_SOURCES?=	${.CURDIR}/../../finance/partiduo-admin
 DISTINFO_FILE=	${PARTIDUO_ADMIN_SOURCES}/distinfo
-.include "${PARTIDUO_ADMIN_SOURCES}/Makefile.version"
 .include "${PARTIDUO_ADMIN_SOURCES}/Makefile.shards"
 
 # Marten : pas de précompilation de sa ligne de commande (postinstall de

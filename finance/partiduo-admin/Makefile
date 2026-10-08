@@ -44,7 +44,6 @@ PARTIDUO_ADMIN_HOME=	${PREFIX}/lib/partiduo-admin
 # qui les lisent ici : même projet, même branche, mêmes archives.
 PARTIDUO_ADMIN_SOURCES?=	${.CURDIR}
 DISTINFO_FILE=	${PARTIDUO_ADMIN_SOURCES}/distinfo
-.include "${PARTIDUO_ADMIN_SOURCES}/Makefile.version"
 .include "${PARTIDUO_ADMIN_SOURCES}/Makefile.shards"
 
 # Marten : pas de précompilation de sa ligne de commande (postinstall de
