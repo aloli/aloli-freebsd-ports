@@ -9,7 +9,7 @@
 # Usage :
 #   Tools/shards-tuples COMPTE/PROJET COMMIT PORT
 #
-#   COMPTE/PROJET  dépôt GitHub du projet (ex. aloli-crystal/partiduo-dist)
+#   COMPTE/PROJET  dépôt GitHub du projet (ex. aloli-partiduo/partiduo-dist)
 #   COMMIT         commit du projet à construire (empreinte complète)
 #   PORT           répertoire du port (ex. finance/partiduo-app-devel)
 #
@@ -29,7 +29,7 @@
 # dépôt au commit, par exemple le lock d'empaquetage d'un projet qui déclare
 # ses shards maison en path: (Tools/packaging-lock) :
 #   SHARDS_TUPLES_LOCK=finance/partiduo-admin-devel/shard.lock.packaging \
-#     Tools/shards-tuples aloli-crystal/partiduo-admin <commit> finance/partiduo-admin-devel
+#     Tools/shards-tuples aloli-partiduo/partiduo-admin <commit> finance/partiduo-admin-devel
 # L'archive principale reste celle du projet au COMMIT donné.
 #
 # Seuls git, curl, awk et sha256sum (ou shasum, ou sha256) sont requis :

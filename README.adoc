@@ -17,7 +17,7 @@ paquets officiels.
 |`partiduo-app`
 |Serveur d'instance Partiduo : cœur, interface, toutes les extensions,
 convertisseur PDF de MODELES. Source : branche `production` de
-`aloli-crystal/partiduo-dist` (*en attente* de cette branche).
+`aloli-partiduo/partiduo-dist` (*en attente* de cette branche).
 
 |`finance/partiduo-app-devel`
 |`partiduo-app-devel`
@@ -29,7 +29,7 @@ test ; *exclusif* de `partiduo-app` (mêmes emplacements).
 |Administration du parc : application web (`partiduo-admin`), ligne de
 commande (`partiduo-admin-manage`), script rc.d `partiduo_admin`,
 planification cron. Source : branche `production` de
-`aloli-crystal/partiduo-admin` (*en attente* de cette branche).
+`aloli-partiduo/partiduo-admin` (*en attente* de cette branche).
 
 |`finance/partiduo-admin-devel`
 |`partiduo-admin-devel`
@@ -111,7 +111,7 @@ pour que les répertoires lui appartiennent quel que soit l'ordre
 d'installation) par `partiduo-agent`.
 
 *Sources partagées* : l'administration et l'exécutant sont construits depuis
-le même projet (`aloli-crystal/partiduo-admin`) et les mêmes shards. Les
+le même projet (`aloli-partiduo/partiduo-admin`) et les mêmes shards. Les
 sources d'une branche (`Makefile.shards`, `distinfo`,
 `shard.lock.packaging`) ne sont rangées qu'une fois, dans
 `finance/partiduo-admin` (production) et `finance/partiduo-admin-devel`
@@ -130,7 +130,7 @@ commit du projet, archives des shards) et `distinfo` du port :
 [source,sh]
 ----
 # après publication du commit de partiduo-dist à construire :
-Tools/shards-tuples aloli-crystal/partiduo-dist <commit complet> finance/partiduo-app-devel
+Tools/shards-tuples aloli-partiduo/partiduo-dist <commit complet> finance/partiduo-app-devel
 ----
 
 *Version du paquet* : `DISTVERSION` est la `version:` du `shard.yml` du
@@ -151,12 +151,12 @@ celui du dépôt au commit (l'archive principale reste celle du commit).
 
 === Projets aux shards maison en `path:` : `Tools/packaging-lock`
 
-`partiduo-admin` déclare ses shards maison en `path: ../../<nom>` (marten,
+`partiduo-admin` déclare ses shards maison en `path: ../../prod-crystal/<nom>` (marten,
 authn, jose, totp, webauthn, password-policy ; `shard.yml` et
 `shard.override.yml`) : son `shard.lock` n'est pas empaquetable.
 `Tools/packaging-lock` en produit un *lock d'empaquetage* : il télécharge
 `shard.yml` (et `shard.override.yml`) au commit, réécrit chaque
-`path: ../../<nom>` en `github: aloli-crystal/<nom>` + `branch: production`
+`path: ../../prod-crystal/<nom>` (ou l'ancienne forme `../../<nom>`) en `github: aloli-crystal/<nom>` + `branch: production`
 (les shards maison empaquetés suivent leur branche production), retire
 `development_dependencies`, lance `shards lock` (réseau GitHub, `shards`
 installé) et écrit le résultat, conservé dans le répertoire du port. Toute
@@ -164,10 +164,10 @@ autre forme de `path:` est refusée.
 
 [source,sh]
 ----
-C=$(git ls-remote https://github.com/aloli-crystal/partiduo-admin refs/heads/development | cut -f1)
-Tools/packaging-lock aloli-crystal/partiduo-admin $C finance/partiduo-admin-devel/shard.lock.packaging
+C=$(git ls-remote https://github.com/aloli-partiduo/partiduo-admin refs/heads/development | cut -f1)
+Tools/packaging-lock aloli-partiduo/partiduo-admin $C finance/partiduo-admin-devel/shard.lock.packaging
 SHARDS_TUPLES_LOCK=finance/partiduo-admin-devel/shard.lock.packaging \
-  Tools/shards-tuples aloli-crystal/partiduo-admin $C finance/partiduo-admin-devel
+  Tools/shards-tuples aloli-partiduo/partiduo-admin $C finance/partiduo-admin-devel
 ----
 
 Ces sources servent aussi à `sysutils/partiduo-agent-devel` (voir plus

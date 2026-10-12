@@ -2,22 +2,24 @@
 # SPDX-License-Identifier: BSD-2-Clause
 #
 # packaging-lock — shard.lock d'empaquetage d'un projet Crystal qui déclare
-# ses shards maison en `path:` (ex. aloli-crystal/partiduo-admin : marten,
-# authn, jose… en `path: ../../<nom>`). Son propre shard.lock contient alors
+# ses shards maison en `path:` (ex. aloli-partiduo/partiduo-admin : marten,
+# authn, jose… en `path: ../../prod-crystal/<nom>`). Son propre shard.lock contient alors
 # des entrées path:, introuvables hors du poste de développement, que
 # Tools/shards-tuples refuse.
 #
 # Usage :
 #   Tools/packaging-lock COMPTE/PROJET COMMIT SORTIE
 #
-#   COMPTE/PROJET  dépôt GitHub du projet (ex. aloli-crystal/partiduo-admin)
+#   COMPTE/PROJET  dépôt GitHub du projet (ex. aloli-partiduo/partiduo-admin)
 #   COMMIT         commit du projet (empreinte complète)
 #   SORTIE         fichier shard.lock à écrire (ex.
 #                  finance/partiduo-admin-devel/shard.lock.packaging)
 #
 # Télécharge shard.yml (et shard.override.yml s'il existe) du projet à ce
 # commit, puis, dans un répertoire temporaire :
-#   - réécrit chaque dépendance `path: ../../<nom>` (des deux fichiers) en
+#   - réécrit chaque dépendance `path: ../../prod-crystal/<nom>` (des deux
+#     fichiers ; ancienne forme `../../<nom>` admise pour les commits
+#     antérieurs au déplacement dans prod-partiduo) en
 #     `github: aloli-crystal/<nom>` + `branch: production` : les shards
 #     maison empaquetés suivent leur branche production ; toute autre forme
 #     de `path:` est refusée ;
@@ -87,11 +89,12 @@ rewrite() {
       indent = $0; sub(/path:.*/, "", indent)
       value = $0; sub(/^[ \t]+path:[ \t]*/, "", value); sub(/[ \t]+#.*$/, "", value)
       gsub(/["\047]/, "", value); sub(/[ \t]+$/, "", value)
-      if (value !~ /^\.\.\/\.\.\/[A-Za-z0-9._-]+$/ || value ~ /^\.\.\/\.\.\/\.+$/) {
-        fail("dépendance path: " value " refusée (seule la forme ../../<nom> est admise)")
+      name = value
+      if (!sub(/^\.\.\/\.\.\/prod-crystal\//, "", name)) sub(/^\.\.\/\.\.\//, "", name)
+      if (name == value || name !~ /^[A-Za-z0-9._-]+$/ || name ~ /^\.+$/) {
+        fail("dépendance path: " value " refusée (seules les formes ../../prod-crystal/<nom> et ../../<nom> sont admises)")
         next
       }
-      name = value; sub(/^\.\.\/\.\.\//, "", name)
       print indent "github: " account "/" name
       print indent "branch: " branch
       next
