@@ -5,7 +5,7 @@ DIST_SUBDIR=	partiduo
 
 MAINTAINER=	philippe@aloli.fr
 COMMENT?=	Executor of the Partiduo fleet administration on a hosting server
-WWW=		https://github.com/aloli-crystal/partiduo-admin
+WWW=		https://github.com/aloli-partiduo/partiduo-admin
 
 LICENSE=	AGPLv3+
 LICENSE_FILE=	${WRKSRC}/LICENSE
@@ -24,7 +24,7 @@ RUN_DEPENDS=	age:security/age \
 USES=		pgsql pkgconfig ssl
 WANT_PGSQL=	client
 USE_GITHUB=	yes
-GH_ACCOUNT=	aloli-crystal
+GH_ACCOUNT=	aloli-partiduo
 GH_PROJECT=	partiduo-admin
 
 # Un seul exécutant par serveur : partiduo-agent (branche production de

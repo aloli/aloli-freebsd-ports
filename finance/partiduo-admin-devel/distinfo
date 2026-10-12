@@ -1,6 +1,6 @@
-TIMESTAMP = 1791442244
-SHA256 (partiduo/aloli-crystal-partiduo-admin-0.1.0.20261008-8dc8846757ca402d93101004fc0e8357c35c3043_GH0.tar.gz) = 6fe1bbdd5d16f2bef3e9413205942f16817e790e400f12813c040f0bba5b4c19
-SIZE (partiduo/aloli-crystal-partiduo-admin-0.1.0.20261008-8dc8846757ca402d93101004fc0e8357c35c3043_GH0.tar.gz) = 812525
+TIMESTAMP = 1791832839
+SHA256 (partiduo/aloli-partiduo-partiduo-admin-0.1.4-6bf6ad4fe15cbd4dc3188f122243b0da79255e6c_GH0.tar.gz) = 5c68d6e1f50437bcb6c3ef60f3a5fbf3ff115f84d45fdc163dc0b50ff1cf203a
+SIZE (partiduo/aloli-partiduo-partiduo-admin-0.1.4-6bf6ad4fe15cbd4dc3188f122243b0da79255e6c_GH0.tar.gz) = 852699
 SHA256 (partiduo/aloli-crystal-authn-be98021bf0da7c8fd8306b3d715e425aec5e7aa3_GH0.tar.gz) = f2e91f45b240ce52f943b464f22b2efb8dac7a021db360b4bac14c4fa6480d7d
 SIZE (partiduo/aloli-crystal-authn-be98021bf0da7c8fd8306b3d715e425aec5e7aa3_GH0.tar.gz) = 17558
 SHA256 (partiduo/jgaskins-bcrypt-4004f17053cba6f2c752ea83162f405143ab541c_GH0.tar.gz) = 1258481d41efa8c16cfb184cd1f896e0a0ea01b2916e1e9be22412b5122c6f59
@@ -15,8 +15,8 @@ SHA256 (partiduo/arcage-crystal-email-60fa798e121b3f210e95a0408f42d6eea87ead40_G
 SIZE (partiduo/arcage-crystal-email-60fa798e121b3f210e95a0408f42d6eea87ead40_GH0.tar.gz) = 86051
 SHA256 (partiduo/crystal-i18n-i18n-27730088123c00d1b61edd9b2d6a646952407f67_GH0.tar.gz) = 4a761c690a27d3dc87a8109bb34e2b409b9b9be3e79ff3a9f35cfb632d25cd74
 SIZE (partiduo/crystal-i18n-i18n-27730088123c00d1b61edd9b2d6a646952407f67_GH0.tar.gz) = 275232
-SHA256 (partiduo/aloli-crystal-jose-8d859486729985a364cb2f713b4897cd4700c41b_GH0.tar.gz) = 67c6469b33c9a6b88377e68894211eb9b7fc00b7a4a2cd33e08e35bd4b339f5d
-SIZE (partiduo/aloli-crystal-jose-8d859486729985a364cb2f713b4897cd4700c41b_GH0.tar.gz) = 30621
+SHA256 (partiduo/aloli-crystal-jose-f2b79a08169f13e7ad9156d630fda04043cabe67_GH0.tar.gz) = a1efbb52a45a16c53cd841113442c79568ad86e325bf495fdc0f6235b2441d75
+SIZE (partiduo/aloli-crystal-jose-f2b79a08169f13e7ad9156d630fda04043cabe67_GH0.tar.gz) = 30456
 SHA256 (partiduo/crystal-community-jwt-e4dfc4c493f5a6c2b72ff5cff14b70e91e54a877_GH0.tar.gz) = cd9dfe0b78d30dd8e838203c2cf9971eaad41bdd1ec9ddb7bad1cbe56c46113f
 SIZE (partiduo/crystal-community-jwt-e4dfc4c493f5a6c2b72ff5cff14b70e91e54a877_GH0.tar.gz) = 43301
 SHA256 (partiduo/aloli-crystal-marten-daabb7c242a307a1c90899acbbf5c40f170fe2b8_GH0.tar.gz) = 19b5ab6783d2ce909979272af38aad6463476c5bae4b3aa9fae67f0890b49dd9

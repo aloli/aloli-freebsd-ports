@@ -1,4 +1,3 @@
-# NOTICE: This lockfile contains some overrides from shard.override.yml
 version: 2.0
 shards:
   authn:
@@ -29,15 +28,15 @@ shards:
     git: https://github.com/crystal-i18n/i18n.git
     version: 0.2.2
 
-  jose: # Overridden
+  jose:
     git: https://github.com/aloli-crystal/jose.git
-    version: 0.2.0+git.commit.8d859486729985a364cb2f713b4897cd4700c41b
+    version: 0.2.0
 
   jwt:
     git: https://github.com/crystal-community/jwt.git
     version: 1.7.2
 
-  marten: # Overridden
+  marten:
     git: https://github.com/aloli-crystal/marten.git
     version: 0.7.0+git.commit.daabb7c242a307a1c90899acbbf5c40f170fe2b8
 
@@ -49,9 +48,9 @@ shards:
     git: https://github.com/spider-gazelle/openssl_ext.git
     version: 2.8.5
 
-  password-policy: # Overridden
+  password-policy:
     git: https://github.com/aloli-crystal/password-policy.git
-    version: 0.1.0+git.commit.2d41f8421f94f70c373b4be3b39f4011d09c7424
+    version: 0.1.0
 
   pg:
     git: https://github.com/will/crystal-pg.git

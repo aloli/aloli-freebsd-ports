@@ -5,7 +5,7 @@ DIST_SUBDIR=	partiduo
 
 MAINTAINER=	philippe@aloli.fr
 COMMENT?=	Fleet administration of Partiduo instances (web application)
-WWW=		https://github.com/aloli-crystal/partiduo-admin
+WWW=		https://github.com/aloli-partiduo/partiduo-admin
 
 LICENSE=	AGPLv3+
 LICENSE_FILE=	${WRKSRC}/LICENSE
@@ -24,7 +24,7 @@ RUN_DEPENDS=	age-keygen:security/age
 
 USES=		pkgconfig ssl
 USE_GITHUB=	yes
-GH_ACCOUNT=	aloli-crystal
+GH_ACCOUNT=	aloli-partiduo
 GH_PROJECT=	partiduo-admin
 
 # Une seule administration par serveur : partiduo-admin (branche production
