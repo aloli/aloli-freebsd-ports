@@ -149,18 +149,23 @@ les refuse.
 `SHARDS_TUPLES_LOCK=<fichier>` fait lire un `shard.lock` local au lieu de
 celui du dépôt au commit (l'archive principale reste celle du commit).
 
-=== Projets aux shards maison en `path:` : `Tools/packaging-lock`
+=== Lock d'empaquetage : `Tools/packaging-lock`
 
-`partiduo-admin` déclare ses shards maison en `path: ../../prod-crystal/<nom>` (marten,
-authn, jose, totp, webauthn, password-policy ; `shard.yml` et
-`shard.override.yml`) : son `shard.lock` n'est pas empaquetable.
+Depuis le 12 octobre 2026, les dépôts Partiduo déclarent toutes leurs
+dépendances en `github:` (shards maison `aloli-crystal/<nom>`, dépôts
+`aloli-partiduo/<dépôt>`) et leurs `shard.lock` commités ne contiennent
+aucun `path:` : `Tools/shards-tuples` peut les lire tels quels.
+
+Le `shard.lock` d'un projet contient toutefois ses dépendances de
+développement (ameba…), inutiles à la construction. Pour `partiduo-admin`,
 `Tools/packaging-lock` en produit un *lock d'empaquetage* : il télécharge
-`shard.yml` (et `shard.override.yml`) au commit, réécrit chaque
-`path: ../../prod-crystal/<nom>` (ou l'ancienne forme `../../<nom>`) en `github: aloli-crystal/<nom>` + `branch: production`
-(les shards maison empaquetés suivent leur branche production), retire
+`shard.yml` (et `shard.override.yml` s'il est versionné) au commit, retire
 `development_dependencies`, lance `shards lock` (réseau GitHub, `shards`
-installé) et écrit le résultat, conservé dans le répertoire du port. Toute
-autre forme de `path:` est refusée.
+installé) et écrit le résultat, conservé dans le répertoire du port. Pour
+les commits antérieurs au 12 octobre, il réécrit aussi chaque
+`path: ../../prod-crystal/<nom>` (ou `../../<nom>`) en
+`github: aloli-crystal/<nom>` + `branch: production` ; toute autre forme de
+`path:` est refusée.
 
 [source,sh]
 ----
