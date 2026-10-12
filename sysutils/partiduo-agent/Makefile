@@ -1,5 +1,5 @@
 PORTNAME=	partiduo-agent
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	sysutils
 DIST_SUBDIR=	partiduo
 
@@ -16,8 +16,10 @@ BUILD_DEPENDS=	crystal:lang/crystal
 LIB_DEPENDS=	libgc-threaded.so:devel/boehm-gc-threaded \
 		libpcre2-8.so:devel/pcre2
 # sudo : les deux enveloppes (sudoers.d/partiduo-agent) ; client PostgreSQL
-# (psql, createdb, dropdb, pg_dump, pg_restore) : bases des instances.
-RUN_DEPENDS=	sudo:security/sudo
+# (psql, createdb, dropdb, pg_dump, pg_restore) : bases des instances ;
+# age 1.3 : sauvegardes chiffrées post-quantiques (D-CHF-013 de partiduo-app).
+RUN_DEPENDS=	age:security/age \
+		sudo:security/sudo
 
 USES=		pgsql pkgconfig ssl
 WANT_PGSQL=	client
@@ -80,8 +82,8 @@ post-install:
 # Sauvegardes : les deux comptes y écrivent (partiduo par pg_dump et tar,
 # partiduo-agent par le groupe ; les répertoires des dossiers héritent du
 # groupe, règle BSD). Fichiers de partiduo-provision (compte des instances),
-# relus par root. État de l'exécutant (tâches en cours, clé du serveur des
-# sauvegardes). Conservés s'ils ne sont pas vides.
+# relus par root. État de l'exécutant (tâches en cours). Conservés s'ils ne
+# sont pas vides.
 	${ECHO_CMD} "@dir(partiduo,partiduo-agent,0770) /var/backups/partiduo" >> ${TMPPLIST}
 	${ECHO_CMD} "@dir(partiduo,partiduo,0750) /var/db/partiduo-stage" >> ${TMPPLIST}
 	${ECHO_CMD} "@dir(partiduo-agent,partiduo-agent,0700) /var/db/partiduo-agent" >> ${TMPPLIST}

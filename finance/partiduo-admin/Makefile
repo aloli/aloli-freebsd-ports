@@ -1,5 +1,5 @@
 PORTNAME=	partiduo-admin
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	finance
 DIST_SUBDIR=	partiduo
 
@@ -17,6 +17,10 @@ LIB_DEPENDS=	libgc-threaded.so:devel/boehm-gc-threaded \
 		libgmp.so:math/gmp \
 		libpcre2-8.so:devel/pcre2 \
 		libyaml.so:textproc/libyaml
+
+# age 1.3 : `age-keygen -y` contrôle une clé de sauvegarde remise pour une
+# restauration (D-CHF-016 de partiduo-app).
+RUN_DEPENDS=	age-keygen:security/age
 
 USES=		pkgconfig ssl
 USE_GITHUB=	yes
