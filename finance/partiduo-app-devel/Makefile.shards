@@ -1,10 +1,10 @@
-# Produit par Tools/shards-tuples (aloli-crystal/partiduo-dist, shard.lock) — ne pas modifier à la main.
-DISTVERSION=	0.1.0.20261008
-GH_TAGNAME=	68c17e8b2a3dfa34629a3e374a8cfdf7db826fd4
+# Produit par Tools/shards-tuples (aloli-partiduo/partiduo-dist, shard.lock) — ne pas modifier à la main.
+DISTVERSION=	0.1.10
+GH_TAGNAME=	f211f96baa2520d0ef5c2c634faf1889261a70a1
 GH_TUPLE=	\
 		aloli-crystal:asciicrystal:1ec0da420c9f50bf5ba10ed64eaebb275bfe577d:asciicrystal/lib/asciicrystal \
 		aloli-crystal:asciicrystal-pdf:a893144e442257fdd3af7a39ce651276e926a68d:asciicrystal_pdf/lib/asciicrystal-pdf \
-		aloli-crystal:authn:dcaf7fbb4562c523f8b4911d304fc1ae5cad7cdd:authn/lib/authn \
+		aloli-crystal:authn:be98021bf0da7c8fd8306b3d715e425aec5e7aa3:authn/lib/authn \
 		jgaskins:bcrypt:4004f17053cba6f2c752ea83162f405143ab541c:bcrypt/lib/bcrypt \
 		spider-gazelle:bindata:f924e3a16a2fb47c0a84469d0afe5816ecabb1c8:bindata/lib/bindata \
 		aloli-crystal:country-flags:ac20c6be4312e3096184246d4b7e881640764f3b:country_flags/lib/country-flags \
@@ -17,29 +17,35 @@ GH_TUPLE=	\
 		crystal-community:jwt:e4dfc4c493f5a6c2b72ff5cff14b70e91e54a877:jwt/lib/jwt \
 		aloli-crystal:kramdown-asciidoc:55bea2df80c29d1066695ae562487f15bb00da98:kramdown_asciidoc/lib/kramdown-asciidoc \
 		aloli-crystal:marten:daabb7c242a307a1c90899acbbf5c40f170fe2b8:marten/lib/marten \
-		martenframework:marten-auth:bd93e72561a7f5719d10a2646d67f456be69b1a5:marten_auth/lib/marten_auth \
+		aloli-crystal:marten-auth:9b53b72bec80555ce24289d6d689c7a226538674:marten_auth/lib/marten_auth \
 		exilor:matrix:db74e62dcc0b65e548bf1a8eda65657310f57152:matrix/lib/matrix \
 		crystal-community:msgpack-crystal:4acaec3312683aea90ee8d0fe10f1e8fdf8f5fb7:msgpack/lib/msgpack \
 		aloli-crystal:noto-cjk:c8ed3077c806d9ec254e0e8847ca4305c45f996d:noto_cjk/lib/noto-cjk \
 		spider-gazelle:openssl_ext:b7c9ea5b1b79aa81fa014c05d0a21054ca2437fc:openssl_ext/lib/openssl_ext \
-		aloli-crystal:partiduo-app:5c2267987c0438050c2c22ac4250d6f39ed527fe:partiduo/lib/partiduo \
-		aloli-crystal:partiduo-choruspro:5a5618e105c0994045aed4e9f6cf9b7f9d2aa5b4:partiduo_choruspro/lib/partiduo-choruspro \
-		aloli-crystal:partiduo-crm:a22de7cfbb4c27e0423edf8aae9d7b272252c827:partiduo_crm/lib/partiduo-crm \
-		aloli-crystal:partiduo-document:097d534f8370ead82701eb6d4df5f097d79b4b94:partiduo_document/lib/partiduo-document \
-		aloli-crystal:partiduo-einvoicing:7d0a66623dc43f39125c099dce68aa170a59d8cf:partiduo_einvoicing/lib/partiduo-einvoicing \
-		aloli-crystal:partiduo-esalink:cd28f74752ebb62383c37e2be2000af51d147c48:partiduo_esalink/lib/partiduo-esalink \
-		aloli-crystal:partiduo-modeles:44f170a02b7030d4573b6c9c80e3192203057915:partiduo_modeles/lib/partiduo-modeles \
-		aloli-crystal:partiduo-superpdp:f7401db34a9800c75781dfea1a3a5def95900114:partiduo_superpdp/lib/partiduo-superpdp \
-		aloli-crystal:partiduo-teledec:9c1855f7729ee124ef988096c28f6470e2824bff:partiduo_teledec/lib/partiduo-teledec \
-		aloli-crystal:partiduo-ui-bulma:ac5696095c78fa9656f93942732f956a625e023a:partiduo_ui_bulma/lib/partiduo-ui-bulma \
-		aloli-crystal:partiduo-urssaf:784b6908747824e828326f63c09fb8b5f523a149:partiduo_urssaf/lib/partiduo-urssaf \
+		aloli-partiduo:partiduo-app:ba07dd1ed8277c76176e8706a2d495d956494602:partiduo/lib/partiduo \
+		aloli-partiduo:partiduo-amortis:558214a03f8768a7255232f095d7a1abe16692fc:partiduo_amortis/lib/partiduo-amortis \
+		aloli-partiduo:partiduo-bankimport:c1ee9fe47c906cabbb090467c5f6d597f4acad03:partiduo_bankimport/lib/partiduo-bankimport \
+		aloli-partiduo:partiduo-choruspro:3fda8dc1ed37953f0bb34f07087e983ed1ac0abb:partiduo_choruspro/lib/partiduo-choruspro \
+		aloli-partiduo:partiduo-crm:3f800a960ff915c59bad50091619957fbedb486c:partiduo_crm/lib/partiduo-crm \
+		aloli-partiduo:partiduo-document:cb083a0164a971fc47684c4eb530538ea4d55663:partiduo_document/lib/partiduo-document \
+		aloli-partiduo:partiduo-einvoicing:20cb9c988f54ad495368d3510f47440797d9ff48:partiduo_einvoicing/lib/partiduo-einvoicing \
+		aloli-partiduo:partiduo-esalink:3e3ad1bb5e6e3c7de2dcfca77ac1a051b11cb0ec:partiduo_esalink/lib/partiduo-esalink \
+		aloli-partiduo:partiduo-form:5e5681e34013422d733f138ca2b033b093c70811:partiduo_form/lib/partiduo-form \
+		aloli-partiduo:partiduo-import:f5a97cbda1df12c96fb58b84c437b6ced4f3cef6:partiduo_import/lib/partiduo-import \
+		aloli-partiduo:partiduo-modeles:f22c02e4dade2c75e12ecfe49e5f1e497bfb4996:partiduo_modeles/lib/partiduo-modeles \
+		aloli-partiduo:partiduo-reports:da4e763ebcdddd64e755188f0fdca7e083246523:partiduo_reports/lib/partiduo-reports \
+		aloli-partiduo:partiduo-sepa:1e9c3a773a0bb8fbc6512881c09bfac18513c27e:partiduo_sepa/lib/partiduo-sepa \
+		aloli-partiduo:partiduo-superpdp:717568d6d9e7155c56b28f041ce617126b7cc176:partiduo_superpdp/lib/partiduo-superpdp \
+		aloli-partiduo:partiduo-teledec:1f9b42807cc22418b0d3cdfd5efcaf0a65560a94:partiduo_teledec/lib/partiduo-teledec \
+		aloli-partiduo:partiduo-ui-bulma:5e2b0604a438997b50e20fe284f840c1785e08d6:partiduo_ui_bulma/lib/partiduo-ui-bulma \
+		aloli-partiduo:partiduo-urssaf:0fd6fdcbe99e3eefcf37efe02b4fdeaa5f4ffb4e:partiduo_urssaf/lib/partiduo-urssaf \
 		aloli-crystal:password-policy:2d41f8421f94f70c373b4be3b39f4011d09c7424:password_policy/lib/password-policy \
 		aloli-crystal:pdf:f00aef73dc3563832f32556173ed98c55debcb44:pdf/lib/pdf \
-		aloli-crystal:pdf-a:e605508e58703ce5386eae9d5a467312538f14d6:pdf_a/lib/pdf-a \
-		aloli-crystal:pdf-validate:97cc8f0c54ed2bd213df6281e4107859e66f2b65:pdf_validate/lib/pdf-validate \
+		aloli-crystal:pdf-a:d205ecd704fd75528a24d6ecf3e062c907230ea4:pdf_a/lib/pdf-a \
+		aloli-crystal:pdf-validate:e4ceee1d62745a75b13d5e164da269d07a7fbe89:pdf_validate/lib/pdf-validate \
 		will:crystal-pg:8b63363430edb5c09d5612f9776e6398efe48bce:pg/lib/pg \
 		aloli-crystal:rouge:f0ceddc61c635b7c122cee9bd9a76650587bddd3:rouge/lib/rouge \
-		aloli-crystal:saml:2590e659f826e5909177b5f2097d1d15b9c16117:saml/lib/saml \
+		aloli-crystal:saml:d879b94f85ab1480a73cbbcc821f48d471d8f4fb:saml/lib/saml \
 		stumpycr:stumpy_core:43c6ac723853c3b96377c98b5d0620b2e517c65b:stumpy_core/lib/stumpy_core \
 		stumpycr:stumpy_jpeg:714ad6c1f905cb503c53843cda8285f52592e2c2:stumpy_jpeg/lib/stumpy_jpeg \
 		stumpycr:stumpy_png:7e1caa8ed2c65e70b31ec575753a331cfbc25f9c:stumpy_png/lib/stumpy_png \

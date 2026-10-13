@@ -5,7 +5,7 @@ DIST_SUBDIR=	partiduo
 
 MAINTAINER=	philippe@aloli.fr
 COMMENT?=	Invoicing and accounting for small businesses (instance server)
-WWW=		https://github.com/aloli-crystal/partiduo-dist
+WWW=		https://github.com/aloli-partiduo/partiduo-dist
 
 LICENSE=	AGPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
@@ -22,7 +22,7 @@ RUN_DEPENDS=	${LOCALBASE}/share/fonts/dejavu/DejaVuSans.ttf:x11-fonts/dejavu
 
 USES=		pkgconfig ssl
 USE_GITHUB=	yes
-GH_ACCOUNT=	aloli-crystal
+GH_ACCOUNT=	aloli-partiduo
 GH_PROJECT=	partiduo-dist
 
 # Une seule version par serveur : partiduo-app (branche production de
