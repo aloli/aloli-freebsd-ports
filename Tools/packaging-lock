@@ -61,7 +61,7 @@ trap 'rm -rf "$WORK"' EXIT
 trap 'exit 1' INT TERM
 
 RAW="https://raw.githubusercontent.com/$REPO/$COMMIT"
-curl -fsSL -o "$WORK/shard.yml.orig" "$RAW/shard.yml" ||
+curl -fsSL --connect-timeout 30 --max-time 600 --retry 3 -o "$WORK/shard.yml.orig" "$RAW/shard.yml" ||
   die "shard.yml introuvable pour $REPO $COMMIT (commit publié ?)"
 # shard.override.yml est facultatif : 404 = absent, toute autre erreur arrête.
 status=$(curl -sSL -o "$WORK/shard.override.yml.orig" -w '%{http_code}' "$RAW/shard.override.yml") ||

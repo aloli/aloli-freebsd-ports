@@ -71,7 +71,7 @@ fi
 fetch() {
   _file="$CACHE/$4"
   if [ ! -s "$_file" ]; then
-    curl -fsSL -o "$_file.part" "https://codeload.github.com/$1/$2/tar.gz/$3" ||
+    curl -fsSL --connect-timeout 30 --max-time 600 --retry 3 -o "$_file.part" "https://codeload.github.com/$1/$2/tar.gz/$3" ||
       die "téléchargement impossible : $1/$2 $3 (commit publié ?)"
     mv "$_file.part" "$_file"
   fi
@@ -94,7 +94,7 @@ resolve() {
 }
 
 # Version du projet au commit : `version:` de son shard.yml.
-SHARD_YML=$(curl -fsSL "https://raw.githubusercontent.com/$REPO/$COMMIT/shard.yml") ||
+SHARD_YML=$(curl -fsSL --connect-timeout 30 --max-time 600 --retry 3 "https://raw.githubusercontent.com/$REPO/$COMMIT/shard.yml") ||
   die "shard.yml introuvable pour $REPO $COMMIT (commit publié ?)"
 VERSION=$(echo "$SHARD_YML" | awk '/^version:/ { print $2; exit }')
 case "$VERSION" in
@@ -126,7 +126,7 @@ if [ -n "${SHARDS_TUPLES_LOCK:-}" ]; then
   LOCK=$(cat "$SHARDS_TUPLES_LOCK")
   LOCK_SOURCE="$SHARDS_TUPLES_LOCK"
 else
-  LOCK=$(curl -fsSL "https://raw.githubusercontent.com/$REPO/$COMMIT/shard.lock") ||
+  LOCK=$(curl -fsSL --connect-timeout 30 --max-time 600 --retry 3 "https://raw.githubusercontent.com/$REPO/$COMMIT/shard.lock") ||
     die "shard.lock introuvable pour $REPO $COMMIT (commit publié ?)"
   LOCK_SOURCE=shard.lock
 fi
