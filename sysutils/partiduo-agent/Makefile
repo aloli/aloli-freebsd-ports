@@ -1,5 +1,5 @@
 PORTNAME=	partiduo-agent
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	sysutils
 DIST_SUBDIR=	partiduo
 
@@ -63,6 +63,7 @@ do-install:
 		${STAGEDIR}${PREFIX}/etc/sudoers.d \
 		${STAGEDIR}${PREFIX}/etc/partiduo-agent \
 		${STAGEDIR}/var/backups/partiduo \
+		${STAGEDIR}/var/backups/partiduo-store \
 		${STAGEDIR}/var/db/partiduo-stage \
 		${STAGEDIR}/var/db/partiduo-agent
 .for _h in partiduo-agent-root partiduo-agent-instance
@@ -79,12 +80,14 @@ post-install:
 	${ECHO_CMD} "@(root,wheel,0755) libexec/partiduo-agent/partiduo-agent-instance" >> ${TMPPLIST}
 	${ECHO_CMD} "@(root,wheel,0440) etc/sudoers.d/partiduo-agent" >> ${TMPPLIST}
 	${ECHO_CMD} "@sample(root,wheel,0644) etc/partiduo-agent/helpers.conf.sample" >> ${TMPPLIST}
-# Sauvegardes : les deux comptes y écrivent (partiduo par pg_dump et tar,
-# partiduo-agent par le groupe ; les répertoires des dossiers héritent du
-# groupe, règle BSD). Fichiers de partiduo-provision (compte des instances),
+# Sauvegardes en préparation : les deux comptes y écrivent (partiduo par
+# pg_dump et tar, partiduo-agent par le groupe ; les répertoires des dossiers
+# héritent du groupe, règle BSD). Stockage sur ce serveur, sans serveur de
+# sauvegarde (--store-dir, D-CHF-025 de partiduo-app) : l'exécutant seul. Fichiers de partiduo-provision (compte des instances),
 # relus par root. État de l'exécutant (tâches en cours). Conservés s'ils ne
 # sont pas vides.
 	${ECHO_CMD} "@dir(partiduo,partiduo-agent,0770) /var/backups/partiduo" >> ${TMPPLIST}
+	${ECHO_CMD} "@dir(partiduo-agent,partiduo-agent,0700) /var/backups/partiduo-store" >> ${TMPPLIST}
 	${ECHO_CMD} "@dir(partiduo,partiduo,0750) /var/db/partiduo-stage" >> ${TMPPLIST}
 	${ECHO_CMD} "@dir(partiduo-agent,partiduo-agent,0700) /var/db/partiduo-agent" >> ${TMPPLIST}
 
