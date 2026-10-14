@@ -15,7 +15,7 @@
 #
 # Options de l'exécutant : partiduo-agent --help. --domain : même valeur que
 # DOMAIN de %%PREFIX%%/etc/partiduo-agent/helpers.conf. Défauts :
-# --state-dir /var/db/partiduo-agent, --backup-dir /var/backups/partiduo,
+# --state-dir /var/db/partiduo-agent, --backup-dir /var/db/partiduo-backups,
 # --pg-socket /tmp, --helpers-dir %%PREFIX%%/libexec/partiduo-agent.
 #
 #   %%PREFIX%%/etc/partiduo-agent/agent.token   jeton du serveur, partiduo-agent, 600 ;
@@ -55,8 +55,9 @@ procname="/usr/sbin/daemon"
 # -f : stdin, stdout et stderr de daemon(8) sur /dev/null (la sortie du
 # serveur va au journal par -o). Sans lui, le superviseur garde ceux de qui
 # l'a lancé : une session SSH (service … start à distance, beryl apply)
-# ne se termine alors jamais.
-command_args="-f -r -R 5 -P ${pidfile} -o ${logfile} -T ${name} -u ${_account} \
+# ne se termine alors jamais. -H : rouvre le journal au SIGHUP de newsyslog
+# (etc/newsyslog.conf.d/partiduo-agent.conf).
+command_args="-f -H -r -R 5 -P ${pidfile} -o ${logfile} -T ${name} -u ${_account} \
 	${agent} ${_agent_flags}"
 partiduo_agent_chdir="${workdir}"
 start_precmd="${name}_prestart"

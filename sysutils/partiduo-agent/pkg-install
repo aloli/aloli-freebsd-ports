@@ -4,7 +4,7 @@
 # ne réserve pas d'entrée dans les fichiers UIDs/GIDs de l'arbre des ports).
 #
 # partiduo-agent : compte de l'exécutant (groupe partiduo-agent, par lequel
-# il écrit dans /var/backups/partiduo). partiduo : compte des instances,
+# il écrit dans /var/db/partiduo-backups). partiduo : compte des instances,
 # créé ici comme par partiduo-app (mêmes attributs) s'il n'existe pas
 # encore, pour que les répertoires du paquet lui appartiennent quel que
 # soit l'ordre d'installation.

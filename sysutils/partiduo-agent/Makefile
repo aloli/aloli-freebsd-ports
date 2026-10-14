@@ -1,5 +1,5 @@
 PORTNAME=	partiduo-agent
-PORTREVISION=	3
+PORTREVISION=	4
 CATEGORIES=	sysutils
 DIST_SUBDIR=	partiduo
 
@@ -62,8 +62,8 @@ do-install:
 	${MKDIR} ${STAGEDIR}${PREFIX}/libexec/partiduo-agent \
 		${STAGEDIR}${PREFIX}/etc/sudoers.d \
 		${STAGEDIR}${PREFIX}/etc/partiduo-agent \
-		${STAGEDIR}/var/backups/partiduo \
-		${STAGEDIR}/var/backups/partiduo-store \
+		${STAGEDIR}/var/db/partiduo-backups \
+		${STAGEDIR}/var/db/partiduo-store \
 		${STAGEDIR}/var/db/partiduo-stage \
 		${STAGEDIR}/var/db/partiduo-agent
 .for _h in partiduo-agent-root partiduo-agent-instance
@@ -73,6 +73,9 @@ do-install:
 		${STAGEDIR}${PREFIX}/etc/sudoers.d/partiduo-agent
 	${INSTALL_DATA} ${WRKSRC}/deploy/helpers.conf.example \
 		${STAGEDIR}${PREFIX}/etc/partiduo-agent/helpers.conf.sample
+	${MKDIR} ${STAGEDIR}${PREFIX}/etc/newsyslog.conf.d
+	${INSTALL_DATA} ${FILESDIR}/partiduo-agent.newsyslog.conf \
+		${STAGEDIR}${PREFIX}/etc/newsyslog.conf.d/partiduo-agent.conf.sample
 
 post-install:
 	${ECHO_CMD} bin/partiduo-agent >> ${TMPPLIST}
@@ -80,14 +83,17 @@ post-install:
 	${ECHO_CMD} "@(root,wheel,0755) libexec/partiduo-agent/partiduo-agent-instance" >> ${TMPPLIST}
 	${ECHO_CMD} "@(root,wheel,0440) etc/sudoers.d/partiduo-agent" >> ${TMPPLIST}
 	${ECHO_CMD} "@sample(root,wheel,0644) etc/partiduo-agent/helpers.conf.sample" >> ${TMPPLIST}
+	${ECHO_CMD} "@sample etc/newsyslog.conf.d/partiduo-agent.conf.sample" >> ${TMPPLIST}
 # Sauvegardes en préparation : les deux comptes y écrivent (partiduo par
 # pg_dump et tar, partiduo-agent par le groupe ; les répertoires des dossiers
 # héritent du groupe, règle BSD). Stockage sur ce serveur, sans serveur de
-# sauvegarde (--store-dir, D-CHF-025 de partiduo-app) : l'exécutant seul. Fichiers de partiduo-provision (compte des instances),
+# sauvegarde (--store-dir, D-CHF-025 de partiduo-app) : l'exécutant seul.
+# Sous /var/db, jamais /var/backups (root:wheel 0750, intraversable par les
+# comptes de service, D-CHF-026). Fichiers de partiduo-provision (compte des instances),
 # relus par root. État de l'exécutant (tâches en cours). Conservés s'ils ne
 # sont pas vides.
-	${ECHO_CMD} "@dir(partiduo,partiduo-agent,0770) /var/backups/partiduo" >> ${TMPPLIST}
-	${ECHO_CMD} "@dir(partiduo-agent,partiduo-agent,0700) /var/backups/partiduo-store" >> ${TMPPLIST}
+	${ECHO_CMD} "@dir(partiduo,partiduo-agent,0770) /var/db/partiduo-backups" >> ${TMPPLIST}
+	${ECHO_CMD} "@dir(partiduo-agent,partiduo-agent,0700) /var/db/partiduo-store" >> ${TMPPLIST}
 	${ECHO_CMD} "@dir(partiduo,partiduo,0750) /var/db/partiduo-stage" >> ${TMPPLIST}
 	${ECHO_CMD} "@dir(partiduo-agent,partiduo-agent,0700) /var/db/partiduo-agent" >> ${TMPPLIST}
 

@@ -13,7 +13,7 @@ remettre les invitations, un MTA local (--mail-command).
 Les sauvegardes sont chiffrées par age 1.3 (installé avec ce paquet),
 signées par la clé de ce serveur et rangées dans un stockage : de
 préférence un serveur de sauvegarde, joint par ssh, où « partiduo-agent
-store-serve » les reçoit (--store-command) ; sinon /var/backups/partiduo-store
+store-serve » les reçoit (--store-command) ; sinon /var/db/partiduo-store
 sur ce serveur (--store-dir), à copier ailleurs régulièrement (voir le
 README de partiduo-admin, « Sauvegardes et chiffrement »).
 
@@ -43,7 +43,7 @@ README de partiduo-admin, « Sauvegardes et chiffrement »).
 4. Service :
 
   sysrc partiduo_agent_enable=YES
-  sysrc partiduo_agent_flags="--mode production --admin-url https://admin.partiduo.app --token-file %%PREFIX%%/etc/partiduo-agent/agent.token --domain partiduo.app --server-name <nom dans l'administration> --store-dir /var/backups/partiduo-store --mail-command '/usr/sbin/sendmail -oi' --mail-from noreply@partiduo.app"
+  sysrc partiduo_agent_flags="--mode production --admin-url https://admin.partiduo.app --token-file %%PREFIX%%/etc/partiduo-agent/agent.token --domain partiduo.app --server-name <nom dans l'administration> --store-dir /var/db/partiduo-store --mail-command '/usr/sbin/sendmail -oi' --mail-from noreply@partiduo.app"
   service partiduo_agent start
 
   Avec un serveur de sauvegarde, remplacer --store-dir par :
@@ -52,8 +52,8 @@ README de partiduo-admin, « Sauvegardes et chiffrement »).
 Sur le serveur de sauvegarde, le même paquet fournit « partiduo-agent
 store-serve » ; le service n'y est pas activé.
 
-Répertoires créés par le paquet : /var/backups/partiduo (partiduo:partiduo-agent
-0770, sauvegardes en préparation), /var/backups/partiduo-store
+Répertoires créés par le paquet : /var/db/partiduo-backups (partiduo:partiduo-agent
+0770, sauvegardes en préparation), /var/db/partiduo-store
 (partiduo-agent 0700, stockage sur ce serveur), /var/db/partiduo-stage (partiduo:partiduo
 0750), /var/db/partiduo-agent (partiduo-agent 0700).
 EOM
