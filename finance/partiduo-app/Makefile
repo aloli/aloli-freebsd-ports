@@ -1,5 +1,5 @@
 PORTNAME=	partiduo-app
-PORTREVISION=	2
+PORTREVISION=	3
 CATEGORIES=	finance
 DIST_SUBDIR=	partiduo
 
@@ -62,8 +62,9 @@ _PARTIDUO_MANAGE_ENV=	${_PARTIDUO_ENV} \
 
 # Optimisation : `--release` (un seul module LLVM, optimisé sur un seul
 # cœur, ~47 Go de mémoire pour partiduo-manage) en production ;
-# partiduo-app-devel la vide : génération de code en parallèle, bien plus
-# rapide, binaires plus lents, sans importance sur le serveur de test.
+# partiduo-app-devel la remplace par --single-module : pas d'optimisation,
+# bien plus rapide (~10 min), binaires plus lents, sans importance sur le
+# serveur de test.
 PARTIDUO_OPTIMIZE?=	--release
 
 # partiduo-server est aussi la ligne de commande : lancé sous le nom
