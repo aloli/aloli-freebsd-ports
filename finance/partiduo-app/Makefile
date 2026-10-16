@@ -1,5 +1,5 @@
 PORTNAME=	partiduo-app
-PORTREVISION=	1
+PORTREVISION=	2
 CATEGORIES=	finance
 DIST_SUBDIR=	partiduo
 
@@ -60,6 +60,12 @@ _PARTIDUO_MANAGE_ENV=	${_PARTIDUO_ENV} \
 		MARTEN_ALLOWED_HOSTS=localhost \
 		DATABASE_URL="postgres:///construction?host=/nonexistent"
 
+# Optimisation : `--release` (un seul module LLVM, optimisé sur un seul
+# cœur, ~47 Go de mémoire pour partiduo-manage) en production ;
+# partiduo-app-devel la vide : génération de code en parallèle, bien plus
+# rapide, binaires plus lents, sans importance sur le serveur de test.
+PARTIDUO_OPTIMIZE?=	--release
+
 _PARTIDUO_PROGRAMS=	partiduo-server:src/server.cr \
 			partiduo-manage:manage.cr \
 			partiduo-modeles-pdf:lib/partiduo-modeles/src/partiduo-modeles/pdf.cr
@@ -67,7 +73,7 @@ _PARTIDUO_PROGRAMS=	partiduo-server:src/server.cr \
 do-build:
 	${MKDIR} ${WRKSRC}/bin
 .for _p in ${_PARTIDUO_PROGRAMS}
-	cd ${WRKSRC} && ${SETENV} ${_PARTIDUO_ENV} crystal build --release --no-debug \
+	cd ${WRKSRC} && ${SETENV} ${_PARTIDUO_ENV} crystal build ${PARTIDUO_OPTIMIZE} --no-debug \
 		-o bin/${_p:C/:.*//} ${_p:C/^[^:]*://}
 .endfor
 

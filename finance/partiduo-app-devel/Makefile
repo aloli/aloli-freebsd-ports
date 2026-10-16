@@ -8,6 +8,9 @@ COMMENT=	Invoicing and accounting for small businesses (development version)
 
 CONFLICTS_INSTALL=	partiduo-app
 
+# Sans --release : construction rapide, en parallèle (serveur de test).
+PARTIDUO_OPTIMIZE=
+
 MASTERDIR=	${.CURDIR}/../partiduo-app
 
 .include "${MASTERDIR}/Makefile"
