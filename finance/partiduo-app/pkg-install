@@ -1,6 +1,6 @@
 #!/bin/sh
 # Compte système des serveurs Partiduo, partagé par partiduo-app et
-# partiduo-app-devel (identifiant attribué par pw : l'overlay aloli-ports
+# partiduo-app-devel (identifiant attribué par pw : l'overlay aloli-freebsd-ports
 # ne réserve pas d'entrée dans les fichiers UIDs/GIDs de l'arbre des ports).
 [ "$2" = "PRE-INSTALL" ] || exit 0
 if ! pw groupshow partiduo >/dev/null 2>&1; then

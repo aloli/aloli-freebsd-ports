@@ -23,7 +23,7 @@
 # (git ls-remote), puis écrit dans PORT :
 #   Makefile.shards  DISTVERSION, GH_TAGNAME du projet et GH_TUPLE des shards ;
 #   distinfo         empreintes et tailles des archives (téléchargées dans
-#                    ${SHARDS_TUPLES_CACHE:-~/.cache/aloli-ports/distfiles}).
+#                    ${SHARDS_TUPLES_CACHE:-~/.cache/aloli-freebsd-ports/distfiles}).
 #
 # SHARDS_TUPLES_LOCK=FICHIER : lit ce shard.lock local au lieu de celui du
 # dépôt au commit, par exemple le lock d'empaquetage d'un projet qui déclare
@@ -56,7 +56,7 @@ esac
 ACCOUNT="${REPO%%/*}"
 PROJECT="${REPO#*/}"
 DIST_SUBDIR=partiduo
-CACHE="${SHARDS_TUPLES_CACHE:-$HOME/.cache/aloli-ports/distfiles}/$DIST_SUBDIR"
+CACHE="${SHARDS_TUPLES_CACHE:-$HOME/.cache/aloli-freebsd-ports/distfiles}/$DIST_SUBDIR"
 mkdir -p "$CACHE"
 
 if command -v sha256sum >/dev/null 2>&1; then

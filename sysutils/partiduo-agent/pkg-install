@@ -1,6 +1,6 @@
 #!/bin/sh
 # Comptes système de l'exécutant Partiduo, partagés par partiduo-agent et
-# partiduo-agent-devel (identifiants attribués par pw : l'overlay aloli-ports
+# partiduo-agent-devel (identifiants attribués par pw : l'overlay aloli-freebsd-ports
 # ne réserve pas d'entrée dans les fichiers UIDs/GIDs de l'arbre des ports).
 #
 # partiduo-agent : compte de l'exécutant (groupe partiduo-agent, par lequel
