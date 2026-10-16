@@ -43,6 +43,13 @@ enveloppes de sudo et leurs règles. Même source que `partiduo-admin`.
 |`sysutils/partiduo-agent-devel`
 |`partiduo-agent-devel`
 |Même chose, branche `development` (port esclave).
+
+|`www/nginx-lite-aloli`
+|`nginx-lite-aloli`
+|nginx allégé (options de `nginx-lite`) + HTTP/2, sans cache proxy ni
+realip (port esclave de `www/nginx`). Nom distinct du paquet officiel
+`nginx-lite` : jamais de chevauchement. Installé par la recette beryl
+privée `nginx-lite-aloli`.
 |===
 
 Une seule version par serveur : `partiduo-app-devel` s'installe aux mêmes
