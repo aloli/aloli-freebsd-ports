@@ -1,6 +1,6 @@
 # Produit par Tools/shards-tuples (aloli-partiduo/partiduo-dist, shard.lock) — ne pas modifier à la main.
-DISTVERSION=	0.1.15
-GH_TAGNAME=	2bead75c7faf88c9ff8951f9c2ebcc97124101fd
+DISTVERSION=	0.1.16
+GH_TAGNAME=	f28d6e613a2b24b6bfdc36a278f0d8aa5e0d52fd
 GH_TUPLE=	\
 		aloli-crystal:asciicrystal:1ec0da420c9f50bf5ba10ed64eaebb275bfe577d:asciicrystal/lib/asciicrystal \
 		aloli-crystal:asciicrystal-pdf:a893144e442257fdd3af7a39ce651276e926a68d:asciicrystal_pdf/lib/asciicrystal-pdf \

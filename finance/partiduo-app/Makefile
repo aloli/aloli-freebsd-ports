@@ -66,8 +66,10 @@ _PARTIDUO_MANAGE_ENV=	${_PARTIDUO_ENV} \
 # rapide, binaires plus lents, sans importance sur le serveur de test.
 PARTIDUO_OPTIMIZE?=	--release
 
+# partiduo-server est aussi la ligne de commande : lancé sous le nom
+# partiduo-manage (lien), il en prend le rôle (D-PKG-011 de partiduo-app).
+# L'application n'est compilée qu'une fois.
 _PARTIDUO_PROGRAMS=	partiduo-server:src/server.cr \
-			partiduo-manage:manage.cr \
 			partiduo-modeles-pdf:lib/partiduo-modeles/src/partiduo-modeles/pdf.cr
 
 do-build:
@@ -76,6 +78,7 @@ do-build:
 	cd ${WRKSRC} && ${SETENV} ${_PARTIDUO_ENV} crystal build ${PARTIDUO_OPTIMIZE} --no-debug \
 		-o bin/${_p:C/:.*//} ${_p:C/^[^:]*://}
 .endfor
+	${LN} -sf partiduo-server ${WRKSRC}/bin/partiduo-manage
 
 do-install:
 	${MKDIR} ${STAGEDIR}${PARTIDUO_HOME}/bin \
@@ -84,6 +87,7 @@ do-install:
 .for _p in ${_PARTIDUO_PROGRAMS}
 	${INSTALL_PROGRAM} ${WRKSRC}/bin/${_p:C/:.*//} ${STAGEDIR}${PARTIDUO_HOME}/bin
 .endfor
+	${LN} -s partiduo-server ${STAGEDIR}${PARTIDUO_HOME}/bin/partiduo-manage
 # Fichiers statiques d'abord : une fois artifacts/ présent, il devient la
 # racine des applications (partiduo-dist, config/settings/production.cr).
 	cd ${WRKSRC} && ${SETENV} ${_PARTIDUO_MANAGE_ENV} \
