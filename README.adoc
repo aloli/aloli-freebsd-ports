@@ -2,8 +2,8 @@
 :icons: font
 
 Overlay de ports FreeBSD de la société ALOLI, construit par poudriere et
-publié sur `pkg.aloli.net`. Même machine de construction et même principe
-que `quimeo-ports` (beryl, `cli/adoc/poudriere-builder-implementation.adoc`) :
+publié sur `pkg.aloli.net`. Machine de construction décrite dans beryl
+(`cli/adoc/poudriere-builder-implementation.adoc`) :
 l'overlay ne contient que nos propres logiciels ; tout le reste vient des
 paquets officiels.
 
