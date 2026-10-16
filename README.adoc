@@ -1,4 +1,4 @@
-= aloli-ports
+= aloli-freebsd-ports
 :icons: font
 
 Overlay de ports FreeBSD de la société ALOLI, construit par poudriere et
@@ -191,7 +191,7 @@ Sur la machine poudriere (FreeBSD 15.0, jail `fbsd150amd64`, arbre `default`) :
 
 [source,sh]
 ----
-git clone <dépôt aloli-ports> /usr/local/poudriere/aloli-ports
+git clone https://github.com/aloli/aloli-freebsd-ports /usr/local/poudriere/aloli-ports
 poudriere ports -c -p aloli -m null -M /usr/local/poudriere/aloli-ports
 poudriere bulk -j fbsd150amd64 -p default -O aloli finance/partiduo-app-devel
 poudriere bulk -j fbsd150amd64 -p default -O aloli finance/partiduo-admin-devel sysutils/partiduo-agent-devel
