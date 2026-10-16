@@ -62,13 +62,18 @@ _PARTIDUO_MANAGE_ENV=	${_PARTIDUO_ENV} \
 		MARTEN_SECRET_KEY=construction \
 		DATABASE_URL="postgres:///construction?host=/nonexistent"
 
+# Variante : partiduo-admin-devel compile avec -Dpartiduo_devel et ne crée
+# que des dossiers devel ; partiduo-admin, sans, que des dossiers app
+# (D-ADM-014 de partiduo-app).
+PARTIDUO_BUILD_FLAGS?=
+
 _PARTIDUO_PROGRAMS=	partiduo-admin:src/server.cr \
 			partiduo-admin-manage:manage.cr
 
 do-build:
 	${MKDIR} ${WRKSRC}/bin
 .for _p in ${_PARTIDUO_PROGRAMS}
-	cd ${WRKSRC} && ${SETENV} ${_PARTIDUO_ENV} crystal build --release --no-debug \
+	cd ${WRKSRC} && ${SETENV} ${_PARTIDUO_ENV} crystal build --release --no-debug ${PARTIDUO_BUILD_FLAGS} \
 		-o bin/${_p:C/:.*//} ${_p:C/^[^:]*://}
 .endfor
 

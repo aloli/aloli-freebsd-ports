@@ -8,6 +8,9 @@ COMMENT=	Fleet administration of Partiduo instances (development version)
 
 CONFLICTS_INSTALL=	partiduo-admin
 
+# Dossiers devel seulement (partiduo-app-devel), D-ADM-014 de partiduo-app.
+PARTIDUO_BUILD_FLAGS=	-Dpartiduo_devel
+
 MASTERDIR=	${.CURDIR}/../partiduo-admin
 
 .include "${MASTERDIR}/Makefile"
