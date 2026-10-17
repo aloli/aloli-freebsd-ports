@@ -1,5 +1,5 @@
 PORTNAME=	partiduo-app
-PORTREVISION=	3
+PORTREVISION=	4
 CATEGORIES=	finance
 DIST_SUBDIR=	partiduo
 

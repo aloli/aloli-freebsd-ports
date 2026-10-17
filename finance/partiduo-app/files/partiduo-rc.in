@@ -40,7 +40,10 @@ load_rc_config $name
 : ${%%PARTIDUO_RC%%_account:="partiduo"}
 
 _instances="${%%PARTIDUO_RC%%_instances}"
-_user="${%%PARTIDUO_RC%%_account}"
+# Pas `_user` : run_rc_command de rc.subr la réécrit (`_user=${name}_user`,
+# vide ici) avant le prestart, qui faisait alors `install -g ""` et `su -m ""`
+# (« unknown group », « unknown login », loulou, 17 oct. 2026).
+_account="${%%PARTIDUO_RC%%_account}"
 
 # Sans instance nommée : chaque instance déclarée, l'une après l'autre.
 if [ -z "$2" ]; then
@@ -80,7 +83,7 @@ procname="/usr/sbin/daemon"
 # serveur va au journal par -o). Sans lui, le superviseur garde ceux de qui
 # l'a lancé : une session SSH (service … start à distance, beryl apply)
 # ne se termine alors jamais.
-command_args="-f -r -R 5 -P ${pidfile} -o ${logfile} -T ${name}-${instance} -u ${_user} \
+command_args="-f -r -R 5 -P ${pidfile} -o ${logfile} -T ${name}-${instance} -u ${_account} \
 	/bin/sh -c 'cd ${workdir} && set -a && . ${envfile} && set +a && exec ${server}'"
 start_precmd="${name}_prestart"
 
@@ -90,9 +93,9 @@ start_precmd="${name}_prestart"
 		err 1 "${envfile} introuvable"
 	fi
 	install -d -o root -g wheel -m 755 /var/run/partiduo
-	install -d -o "${_user}" -g "${_user}" -m 750 /var/log/partiduo "${workdir}"
+	install -d -o "${_account}" -g "${_account}" -m 750 /var/log/partiduo "${workdir}"
 	echo "${name} ${instance} : migrations"
-	if ! su -m "${_user}" -c "cd ${workdir} && set -a && . ${envfile} && set +a && exec ${manage} migrate" \
+	if ! su -m "${_account}" -c "cd ${workdir} && set -a && . ${envfile} && set +a && exec ${manage} migrate" \
 	    >>"${logfile}" 2>&1; then
 		err 1 "${instance} : échec des migrations, instance non démarrée (${logfile})"
 	fi
