@@ -30,7 +30,7 @@ shards:
 
   jose:
     git: https://github.com/aloli-crystal/jose.git
-    version: 0.2.0
+    version: 0.2.1
 
   jwt:
     git: https://github.com/crystal-community/jwt.git
@@ -50,7 +50,7 @@ shards:
 
   partiduo-backup:
     git: https://github.com/aloli-partiduo/partiduo-backup.git
-    version: 0.1.1+git.commit.88f24eb76036ad3c31d99de8f165a7795ab45c60
+    version: 0.1.2+git.commit.20929015ca18f8cbf2c45b1e64fcc8d5935eb3d9
 
   password-policy:
     git: https://github.com/aloli-crystal/password-policy.git
@@ -66,5 +66,5 @@ shards:
 
   webauthn:
     git: https://github.com/aloli-crystal/webauthn.git
-    version: 0.1.0+git.commit.9df38fbe65ad709096ef5455c27e5e13f49dc66e
+    version: 0.1.1+git.commit.21fa484ef5bb04ba132c28923eeca32069ecde84
 

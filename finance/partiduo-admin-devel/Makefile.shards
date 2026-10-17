@@ -1,6 +1,6 @@
 # Produit par Tools/shards-tuples (aloli-partiduo/partiduo-admin, finance/partiduo-admin-devel/shard.lock.packaging) — ne pas modifier à la main.
-DISTVERSION=	0.1.13
-GH_TAGNAME=	063889540b8535a98d5bc1fd001579d94fa19d55
+DISTVERSION=	0.1.15
+GH_TAGNAME=	5c800b2cd73c762afa8a00795fec6f0f3c040e77
 GH_TUPLE=	\
 		aloli-crystal:authn:be98021bf0da7c8fd8306b3d715e425aec5e7aa3:authn/lib/authn \
 		jgaskins:bcrypt:4004f17053cba6f2c752ea83162f405143ab541c:bcrypt/lib/bcrypt \
@@ -9,13 +9,13 @@ GH_TUPLE=	\
 		spider-gazelle:ed25519:c5b25bdc26559ce0c781947d4f82e4895ce7d3b1:ed25519/lib/ed25519 \
 		arcage:crystal-email:60fa798e121b3f210e95a0408f42d6eea87ead40:email/lib/email \
 		crystal-i18n:i18n:27730088123c00d1b61edd9b2d6a646952407f67:i18n/lib/i18n \
-		aloli-crystal:jose:f2b79a08169f13e7ad9156d630fda04043cabe67:jose/lib/jose \
+		aloli-crystal:jose:ae6fc12bfc876ba8dbcb4b4e3e6342f732ff5503:jose/lib/jose \
 		crystal-community:jwt:e4dfc4c493f5a6c2b72ff5cff14b70e91e54a877:jwt/lib/jwt \
 		aloli-crystal:marten:daabb7c242a307a1c90899acbbf5c40f170fe2b8:marten/lib/marten \
 		crystal-community:msgpack-crystal:4acaec3312683aea90ee8d0fe10f1e8fdf8f5fb7:msgpack/lib/msgpack \
 		spider-gazelle:openssl_ext:b7c9ea5b1b79aa81fa014c05d0a21054ca2437fc:openssl_ext/lib/openssl_ext \
-		aloli-partiduo:partiduo-backup:88f24eb76036ad3c31d99de8f165a7795ab45c60:partiduo_backup/lib/partiduo-backup \
+		aloli-partiduo:partiduo-backup:20929015ca18f8cbf2c45b1e64fcc8d5935eb3d9:partiduo_backup/lib/partiduo-backup \
 		aloli-crystal:password-policy:2d41f8421f94f70c373b4be3b39f4011d09c7424:password_policy/lib/password-policy \
 		will:crystal-pg:8b63363430edb5c09d5612f9776e6398efe48bce:pg/lib/pg \
 		aloli-crystal:totp:f4d2cba2ce6630d6441bc85b2b06f662ab380fc2:totp/lib/totp \
-		aloli-crystal:webauthn:9df38fbe65ad709096ef5455c27e5e13f49dc66e:webauthn/lib/webauthn
+		aloli-crystal:webauthn:21fa484ef5bb04ba132c28923eeca32069ecde84:webauthn/lib/webauthn
