@@ -1,6 +1,6 @@
-TIMESTAMP = 1792313103
-SHA256 (partiduo/aloli-partiduo-partiduo-admin-0.1.16-33865ec198173ef14348a3fd8dde0e9b116c5d1b_GH0.tar.gz) = efb655fe416e60754984ca5c9a21f7b44409b18885064bb77e46333d2969c0f5
-SIZE (partiduo/aloli-partiduo-partiduo-admin-0.1.16-33865ec198173ef14348a3fd8dde0e9b116c5d1b_GH0.tar.gz) = 850076
+TIMESTAMP = 1792357604
+SHA256 (partiduo/aloli-partiduo-partiduo-admin-0.1.18-0ec07c1b118c65018698e74399b83126a30331f0_GH0.tar.gz) = b7e0a09ea5e5da3b8f681850a3e50b783384db08b20189b5f3c3a4aaef1e3081
+SIZE (partiduo/aloli-partiduo-partiduo-admin-0.1.18-0ec07c1b118c65018698e74399b83126a30331f0_GH0.tar.gz) = 851743
 SHA256 (partiduo/aloli-crystal-authn-be98021bf0da7c8fd8306b3d715e425aec5e7aa3_GH0.tar.gz) = f2e91f45b240ce52f943b464f22b2efb8dac7a021db360b4bac14c4fa6480d7d
 SIZE (partiduo/aloli-crystal-authn-be98021bf0da7c8fd8306b3d715e425aec5e7aa3_GH0.tar.gz) = 17558
 SHA256 (partiduo/jgaskins-bcrypt-4004f17053cba6f2c752ea83162f405143ab541c_GH0.tar.gz) = 1258481d41efa8c16cfb184cd1f896e0a0ea01b2916e1e9be22412b5122c6f59
@@ -21,8 +21,8 @@ SHA256 (partiduo/crystal-community-jwt-e4dfc4c493f5a6c2b72ff5cff14b70e91e54a877_
 SIZE (partiduo/crystal-community-jwt-e4dfc4c493f5a6c2b72ff5cff14b70e91e54a877_GH0.tar.gz) = 43301
 SHA256 (partiduo/aloli-crystal-marten-daabb7c242a307a1c90899acbbf5c40f170fe2b8_GH0.tar.gz) = 19b5ab6783d2ce909979272af38aad6463476c5bae4b3aa9fae67f0890b49dd9
 SIZE (partiduo/aloli-crystal-marten-daabb7c242a307a1c90899acbbf5c40f170fe2b8_GH0.tar.gz) = 2633807
-SHA256 (partiduo/aloli-crystal-marten-mail-c4b1ec2ebeb2ea4bde3d9dcc145cef0493caa779_GH0.tar.gz) = 507f73081f91366a3ea75255df790922073f034ee01744cdc0403563a63c8e62
-SIZE (partiduo/aloli-crystal-marten-mail-c4b1ec2ebeb2ea4bde3d9dcc145cef0493caa779_GH0.tar.gz) = 9261
+SHA256 (partiduo/aloli-crystal-marten-mail-cbd71332d87c756722678d23e91c3308604575a5_GH0.tar.gz) = f7f4b8b6e1adce665bd62090da5f0c49ebe2d50f4cb8b6c79a4a6565343fbd37
+SIZE (partiduo/aloli-crystal-marten-mail-cbd71332d87c756722678d23e91c3308604575a5_GH0.tar.gz) = 11659
 SHA256 (partiduo/crystal-community-msgpack-crystal-4acaec3312683aea90ee8d0fe10f1e8fdf8f5fb7_GH0.tar.gz) = 8545c9152022862a2feae4a2e6643f38a689e5b96fbc9465f800d55a51faa1ea
 SIZE (partiduo/crystal-community-msgpack-crystal-4acaec3312683aea90ee8d0fe10f1e8fdf8f5fb7_GH0.tar.gz) = 40818
 SHA256 (partiduo/spider-gazelle-openssl_ext-b7c9ea5b1b79aa81fa014c05d0a21054ca2437fc_GH0.tar.gz) = d32c44ff1111654cf8a511fa215863345a336bf94f319a76997835fb2b9880f2
