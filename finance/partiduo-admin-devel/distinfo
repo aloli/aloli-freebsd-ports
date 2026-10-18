@@ -1,6 +1,6 @@
-TIMESTAMP = 1792357604
-SHA256 (partiduo/aloli-partiduo-partiduo-admin-0.1.18-0ec07c1b118c65018698e74399b83126a30331f0_GH0.tar.gz) = b7e0a09ea5e5da3b8f681850a3e50b783384db08b20189b5f3c3a4aaef1e3081
-SIZE (partiduo/aloli-partiduo-partiduo-admin-0.1.18-0ec07c1b118c65018698e74399b83126a30331f0_GH0.tar.gz) = 851743
+TIMESTAMP = 1792359373
+SHA256 (partiduo/aloli-partiduo-partiduo-admin-0.1.20-326d3dc94650546a96ccdc2a95f9cccdbc34733a_GH0.tar.gz) = 9beb47c4c539693505d37607b1ea86a1935e8a687b2b9eb03d681b44b4c10ce5
+SIZE (partiduo/aloli-partiduo-partiduo-admin-0.1.20-326d3dc94650546a96ccdc2a95f9cccdbc34733a_GH0.tar.gz) = 852865
 SHA256 (partiduo/aloli-crystal-authn-be98021bf0da7c8fd8306b3d715e425aec5e7aa3_GH0.tar.gz) = f2e91f45b240ce52f943b464f22b2efb8dac7a021db360b4bac14c4fa6480d7d
 SIZE (partiduo/aloli-crystal-authn-be98021bf0da7c8fd8306b3d715e425aec5e7aa3_GH0.tar.gz) = 17558
 SHA256 (partiduo/jgaskins-bcrypt-4004f17053cba6f2c752ea83162f405143ab541c_GH0.tar.gz) = 1258481d41efa8c16cfb184cd1f896e0a0ea01b2916e1e9be22412b5122c6f59
@@ -27,8 +27,8 @@ SHA256 (partiduo/crystal-community-msgpack-crystal-4acaec3312683aea90ee8d0fe10f1
 SIZE (partiduo/crystal-community-msgpack-crystal-4acaec3312683aea90ee8d0fe10f1e8fdf8f5fb7_GH0.tar.gz) = 40818
 SHA256 (partiduo/spider-gazelle-openssl_ext-b7c9ea5b1b79aa81fa014c05d0a21054ca2437fc_GH0.tar.gz) = d32c44ff1111654cf8a511fa215863345a336bf94f319a76997835fb2b9880f2
 SIZE (partiduo/spider-gazelle-openssl_ext-b7c9ea5b1b79aa81fa014c05d0a21054ca2437fc_GH0.tar.gz) = 35425
-SHA256 (partiduo/aloli-partiduo-partiduo-backup-20929015ca18f8cbf2c45b1e64fcc8d5935eb3d9_GH0.tar.gz) = 444cdfe2a2968e5d09c71bebd433917a45d2bdc842e8e6ce50e9d91a7540beeb
-SIZE (partiduo/aloli-partiduo-partiduo-backup-20929015ca18f8cbf2c45b1e64fcc8d5935eb3d9_GH0.tar.gz) = 29643
+SHA256 (partiduo/aloli-partiduo-partiduo-backup-e04db07966851de1d82c3791ad09edf08e1955ef_GH0.tar.gz) = a0b1382ec542acfaf74a7f78057fa81bbe474eebc35561c5c1b6fee90c3ee83e
+SIZE (partiduo/aloli-partiduo-partiduo-backup-e04db07966851de1d82c3791ad09edf08e1955ef_GH0.tar.gz) = 30389
 SHA256 (partiduo/aloli-crystal-password-policy-2d41f8421f94f70c373b4be3b39f4011d09c7424_GH0.tar.gz) = 88c74a279910b1a719dcddd02da9ad90c484371fccbf99eec92bd887765b4f42
 SIZE (partiduo/aloli-crystal-password-policy-2d41f8421f94f70c373b4be3b39f4011d09c7424_GH0.tar.gz) = 18900
 SHA256 (partiduo/will-crystal-pg-8b63363430edb5c09d5612f9776e6398efe48bce_GH0.tar.gz) = 77ea8b8b99ac93609a1d6265583f2c904f0ef1c7a856fdba6a8deb628dabcbf3

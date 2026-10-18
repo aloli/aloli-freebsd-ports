@@ -1,6 +1,6 @@
 # Produit par Tools/shards-tuples (aloli-partiduo/partiduo-admin, finance/partiduo-admin-devel/shard.lock.packaging) — ne pas modifier à la main.
-DISTVERSION=	0.1.18
-GH_TAGNAME=	0ec07c1b118c65018698e74399b83126a30331f0
+DISTVERSION=	0.1.20
+GH_TAGNAME=	326d3dc94650546a96ccdc2a95f9cccdbc34733a
 GH_TUPLE=	\
 		aloli-crystal:authn:be98021bf0da7c8fd8306b3d715e425aec5e7aa3:authn/lib/authn \
 		jgaskins:bcrypt:4004f17053cba6f2c752ea83162f405143ab541c:bcrypt/lib/bcrypt \
@@ -15,7 +15,7 @@ GH_TUPLE=	\
 		aloli-crystal:marten-mail:cbd71332d87c756722678d23e91c3308604575a5:marten_mail/lib/marten-mail \
 		crystal-community:msgpack-crystal:4acaec3312683aea90ee8d0fe10f1e8fdf8f5fb7:msgpack/lib/msgpack \
 		spider-gazelle:openssl_ext:b7c9ea5b1b79aa81fa014c05d0a21054ca2437fc:openssl_ext/lib/openssl_ext \
-		aloli-partiduo:partiduo-backup:20929015ca18f8cbf2c45b1e64fcc8d5935eb3d9:partiduo_backup/lib/partiduo-backup \
+		aloli-partiduo:partiduo-backup:e04db07966851de1d82c3791ad09edf08e1955ef:partiduo_backup/lib/partiduo-backup \
 		aloli-crystal:password-policy:2d41f8421f94f70c373b4be3b39f4011d09c7424:password_policy/lib/password-policy \
 		will:crystal-pg:8b63363430edb5c09d5612f9776e6398efe48bce:pg/lib/pg \
 		aloli-crystal:totp:f4d2cba2ce6630d6441bc85b2b06f662ab380fc2:totp/lib/totp \
