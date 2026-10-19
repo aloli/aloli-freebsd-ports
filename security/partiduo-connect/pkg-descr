@@ -1,0 +1,9 @@
+Partiduo connect is the identity provider shared by every Partiduo
+instance and by the fleet administration (aloli-partiduo/partiduo-admin,
+ADR-012): one account per person, with one passkey, one authenticator app
+and one set of recovery codes, whatever the number of instances. It speaks
+OpenID Connect (authorization code with PKCE, ES256 ID tokens, back-channel
+logout); each instance keeps deciding who gets in and with which rights.
+
+This package installs the web application (partiduo-connect), its command
+line (partiduo-connect-manage) and the rc.d script partiduo_connect.

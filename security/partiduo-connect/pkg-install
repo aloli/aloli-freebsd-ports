@@ -1,0 +1,14 @@
+#!/bin/sh
+# Compte système de connect (Partiduo), partagé par partiduo-connect et
+# partiduo-connect-devel (identifiant attribué par pw : l'overlay
+# aloli-freebsd-ports ne réserve pas d'entrée dans les fichiers UIDs/GIDs de
+# l'arbre des ports).
+[ "$2" = "PRE-INSTALL" ] || exit 0
+if ! pw groupshow partiduo-connect >/dev/null 2>&1; then
+	pw groupadd partiduo-connect || exit 1
+fi
+if ! pw usershow partiduo-connect >/dev/null 2>&1; then
+	pw useradd partiduo-connect -g partiduo-connect -c "Partiduo connect" \
+		-d /nonexistent -s /usr/sbin/nologin || exit 1
+fi
+exit 0

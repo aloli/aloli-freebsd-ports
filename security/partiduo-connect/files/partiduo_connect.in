@@ -1,0 +1,75 @@
+#!/bin/sh
+
+# PROVIDE: partiduo_connect
+# REQUIRE: LOGIN postgresql
+# KEYWORD: shutdown
+#
+# connect (fournisseur d'identité de Partiduo, ADR-012) servi par
+# %%PKGNAME%% (%%PARTIDUO_CONNECT_HOME%%).
+#
+# Dans /etc/rc.conf :
+#   partiduo_connect_enable="YES"
+#
+#   %%PREFIX%%/etc/partiduo-connect/connect.env  variables (MARTEN_ENV=production,
+#                         DATABASE_URL, MARTEN_SECRET_KEY, PARTIDUO_DOMAIN,
+#                         PARTIDUO_CONNECT_SIGNING_KEYS…, voir
+#                         connect.env.sample), root:partiduo-connect, 640 ;
+#   /var/db/partiduo-connect                    répertoire de travail ;
+#   /var/log/partiduo-connect.log               journal ;
+#   /var/run/partiduo-connect.pid               processus superviseur (daemon -r).
+#
+# Au démarrage, les migrations passent d'abord (partiduo-connect-manage
+# migrate) : après une mise à jour du paquet, « service partiduo_connect
+# restart » suffit. Si la migration échoue, le serveur ne démarre pas.
+
+. /etc/rc.subr
+
+name=partiduo_connect
+rcvar=partiduo_connect_enable
+
+load_rc_config $name
+
+: ${partiduo_connect_enable:="NO"}
+
+# Compte des processus : celui que crée le paquet. (Pas de
+# partiduo_connect_user : rc.subr lancerait alors daemon(8) lui-même sous ce
+# compte, qui ne pourrait plus écrire le fichier pid ; ni de `_user`, que
+# run_rc_command écrase.)
+_account="partiduo-connect"
+envfile="%%PREFIX%%/etc/partiduo-connect/connect.env"
+workdir="/var/db/partiduo-connect"
+logfile="/var/log/partiduo-connect.log"
+pidfile="/var/run/partiduo-connect.pid"
+server="%%PARTIDUO_CONNECT_HOME%%/bin/partiduo-connect"
+manage="%%PARTIDUO_CONNECT_HOME%%/bin/partiduo-connect-manage"
+
+command="/usr/sbin/daemon"
+procname="/usr/sbin/daemon"
+# -f : entrées et sorties de daemon(8) sur /dev/null (une session SSH qui
+# lance le service se termine) ; -H : le journal est rouvert au SIGHUP de
+# newsyslog.
+command_args="-f -H -r -R 5 -P ${pidfile} -o ${logfile} -T ${name} -u ${_account} \
+	/bin/sh -c 'cd ${workdir} && set -a && . ${envfile} && set +a && exec ${server}'"
+start_precmd="${name}_prestart"
+
+partiduo_connect_prestart()
+{
+	if [ ! -r "${envfile}" ]; then
+		err 1 "${envfile} introuvable (modèle : ${envfile}.sample)"
+	fi
+	# Réglages sans lesquels la production ne doit pas démarrer.
+	if ! (set -a && . "${envfile}" && [ "${MARTEN_ENV}" = production ] &&
+	    [ -n "${MARTEN_SECRET_KEY}" ] && [ -n "${DATABASE_URL}" ] &&
+	    [ -r "${PARTIDUO_CONNECT_SIGNING_KEYS}" ]); then
+		err 1 "${envfile} : MARTEN_ENV=production, MARTEN_SECRET_KEY, DATABASE_URL et PARTIDUO_CONNECT_SIGNING_KEYS (fichier lisible) requis"
+	fi
+	install -d -o "${_account}" -g "${_account}" -m 750 "${workdir}"
+	echo "${name} : migrations"
+	# su -m lance le shell de root : /bin/sh explicite.
+	if ! su -m "${_account}" -c "/bin/sh -c 'cd ${workdir} && set -a && . ${envfile} && set +a && exec ${manage} migrate'" \
+	    >>"${logfile}" 2>&1; then
+		err 1 "échec des migrations, connect non démarré (${logfile})"
+	fi
+}
+
+run_rc_command "$1"

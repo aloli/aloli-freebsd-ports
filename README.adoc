@@ -44,6 +44,17 @@ enveloppes de sudo et leurs règles. Même source que `partiduo-admin`.
 |`partiduo-agent-devel`
 |Même chose, branche `development` (port esclave).
 
+|`security/partiduo-connect`
+|`partiduo-connect`
+|connect, fournisseur d'identité commun aux dossiers et à
+l'administration (ADR-012) : application web (`partiduo-connect`), ligne de
+commande (`partiduo-connect-manage`), script rc.d `partiduo_connect`. Même
+source que `partiduo-admin` ; installé à part (`connect.<domaine>`).
+
+|`security/partiduo-connect-devel`
+|`partiduo-connect-devel`
+|Même chose, branche `development` (port esclave).
+
 |`www/nginx-lite-aloli`
 |`nginx-lite-aloli`
 |nginx allégé (options de `nginx-lite`) + HTTP/2, sans cache proxy ni

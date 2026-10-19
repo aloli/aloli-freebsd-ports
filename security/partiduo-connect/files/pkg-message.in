@@ -1,0 +1,36 @@
+[
+{ type: install
+  message: <<EOM
+%%PKGNAME%% est installé dans %%PARTIDUO_CONNECT_HOME%%.
+
+1. Base (PostgreSQL, socket Unix) :
+
+  su -m postgres -c 'createuser partiduo-connect && createdb --owner=partiduo-connect --encoding=UTF8 partiduo_connect'
+
+2. Clé de signature, à garder au coffre (une ligne) :
+
+  partiduo-connect-manage signing-key generate
+
+   puis %%PREFIX%%/etc/partiduo-connect/signing-keys.json
+   (root:partiduo-connect, 0640) : [ <la ligne> ].
+
+3. Environnement : %%PREFIX%%/etc/partiduo-connect/connect.env
+   (root:partiduo-connect, 0640, modèle connect.env.sample).
+
+4. Service (les migrations passent à chaque démarrage) :
+
+  sysrc partiduo_connect_enable=YES
+  service partiduo_connect start
+
+5. Clients (un par dossier, et l'administration) ; le secret, affiché une
+   fois, va au coffre :
+
+  su -m partiduo-connect -c "/bin/sh -c 'set -a && . %%PREFIX%%/etc/partiduo-connect/connect.env && set +a && partiduo-connect-manage client add --client-id=… --name=… --redirect-uri=…'"
+
+Le serveur écoute sur 127.0.0.1 (PORT, 8300 par défaut) : un serveur
+mandataire (nginx) sert connect.<domaine> en HTTPS et pose
+X-Forwarded-Proto. Rotation du journal :
+%%PREFIX%%/etc/newsyslog.conf.d/partiduo-connect.conf.
+EOM
+}
+]
