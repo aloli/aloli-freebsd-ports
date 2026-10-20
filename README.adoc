@@ -13,6 +13,13 @@ paquets officiels.
 |===
 |Port |Paquet |Contenu
 
+|`databases/postgresql18-server-aloli`
+|`postgresql18-server-aloli`
+|Serveur PostgreSQL 18 sans compilation JIT (option `LLVM` exclue ; port
+esclave de `databases/postgresql18-server`) : ni `llvm19` ni Python sur les
+serveurs. Nom distinct du paquet officiel `postgresql18-server`, avec
+lequel il est en conflit ; client officiel `postgresql18-client`.
+
 |`finance/partiduo-app`
 |`partiduo-app`
 |Serveur d'instance Partiduo : cœur, interface, toutes les extensions,
