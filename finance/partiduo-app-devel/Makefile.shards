@@ -1,6 +1,6 @@
 # Produit par Tools/shards-tuples (aloli-partiduo/partiduo-dist, shard.lock) — ne pas modifier à la main.
-DISTVERSION=	0.1.23
-GH_TAGNAME=	008451637b978f4ffd0b72ad2e1cd1c82f293987
+DISTVERSION=	0.1.25
+GH_TAGNAME=	c0bc9381a93a2639af44b221fd0ff532fc6af88b
 GH_TUPLE=	\
 		aloli-crystal:asciicrystal:1ec0da420c9f50bf5ba10ed64eaebb275bfe577d:asciicrystal/lib/asciicrystal \
 		aloli-crystal:asciicrystal-pdf:c9c66e0a20d116f9c849c20e91498261ee4ce4ed:asciicrystal_pdf/lib/asciicrystal-pdf \
@@ -22,25 +22,25 @@ GH_TUPLE=	\
 		crystal-community:msgpack-crystal:4acaec3312683aea90ee8d0fe10f1e8fdf8f5fb7:msgpack/lib/msgpack \
 		aloli-crystal:noto-cjk:d30356d9a3a5a02f7b4c8861285d7a4cef09ea16:noto_cjk/lib/noto-cjk \
 		spider-gazelle:openssl_ext:b7c9ea5b1b79aa81fa014c05d0a21054ca2437fc:openssl_ext/lib/openssl_ext \
-		aloli-partiduo:partiduo-app:9863bf96d6f7eca2d2f28664a85565db856300a6:partiduo/lib/partiduo \
-		aloli-partiduo:partiduo-amortis:efc29618b524dab44ba39c71ed166eb5fcaa7d42:partiduo_amortis/lib/partiduo-amortis \
+		aloli-partiduo:partiduo-app:9961af3600555b99f2a73ddbf4d068c13cf62853:partiduo/lib/partiduo \
+		aloli-partiduo:partiduo-amortis:0809e89578c132f5385909f7aeec62df6916557a:partiduo_amortis/lib/partiduo-amortis \
 		aloli-partiduo:partiduo-backup:e04db07966851de1d82c3791ad09edf08e1955ef:partiduo_backup/lib/partiduo-backup \
-		aloli-partiduo:partiduo-bankimport:d52d83495d1bc81bce5dae7badbd23f9dffcc11e:partiduo_bankimport/lib/partiduo-bankimport \
-		aloli-partiduo:partiduo-choruspro:eb4dc6b74b32550e3051ff6a973a05393026933a:partiduo_choruspro/lib/partiduo-choruspro \
-		aloli-partiduo:partiduo-crm:c76bcee39cf14fa891f45e9b9bf2cf699669f797:partiduo_crm/lib/partiduo-crm \
-		aloli-partiduo:partiduo-document:f22b6e2e9ccb97e45ec3665f7fd1a00f6503dd22:partiduo_document/lib/partiduo-document \
-		aloli-partiduo:partiduo-einvoicing:281680bc84604bd0b00cf0a7421c70e82d3f993f:partiduo_einvoicing/lib/partiduo-einvoicing \
-		aloli-partiduo:partiduo-esalink:47460d7d068aa4daddc277ecdc4c4ea6956fed82:partiduo_esalink/lib/partiduo-esalink \
-		aloli-partiduo:partiduo-form:0e380d9699930b8c23076ce30b9ccbe8c7ee3fd6:partiduo_form/lib/partiduo-form \
-		aloli-partiduo:partiduo-import:c348dc3f926133fa8ec79e9a7b0b891b40ec5066:partiduo_import/lib/partiduo-import \
-		aloli-partiduo:partiduo-modeles:ef7bcf0dedc3a6cf722e34d8e087455075008493:partiduo_modeles/lib/partiduo-modeles \
-		aloli-partiduo:partiduo-perso:77446002a78378419607c501462010a3918e0db0:partiduo_perso/lib/partiduo-perso \
-		aloli-partiduo:partiduo-reports:3b2550e341a0a5c7823054c69189ac65b0070864:partiduo_reports/lib/partiduo-reports \
-		aloli-partiduo:partiduo-sepa:031959ad225459b4ea14a946890d219e67a4ec2d:partiduo_sepa/lib/partiduo-sepa \
-		aloli-partiduo:partiduo-superpdp:544fe96c5a4c289abb86020c8d9fe71a63cc43ef:partiduo_superpdp/lib/partiduo-superpdp \
-		aloli-partiduo:partiduo-teledec:e91c1859400a4adeeba2ac5c914e992e28c70781:partiduo_teledec/lib/partiduo-teledec \
-		aloli-partiduo:partiduo-ui-bulma:9f8b77ec5fd735c7f6d072258d70efa6ad77533a:partiduo_ui_bulma/lib/partiduo-ui-bulma \
-		aloli-partiduo:partiduo-urssaf:9a0f382420e74cf30cb138bf2d03fda4fb8b34e7:partiduo_urssaf/lib/partiduo-urssaf \
+		aloli-partiduo:partiduo-bankimport:34a063d59c7d5cf63c8a2774f92733e62fd6371c:partiduo_bankimport/lib/partiduo-bankimport \
+		aloli-partiduo:partiduo-choruspro:8457b0ac171b1dd78ebce76db52dbe8221834439:partiduo_choruspro/lib/partiduo-choruspro \
+		aloli-partiduo:partiduo-crm:3381e4b07b6dc5dd6ea8c3190356601f59e84d24:partiduo_crm/lib/partiduo-crm \
+		aloli-partiduo:partiduo-document:4976a9ef35b7e6873e56bce155fd8f59b377a342:partiduo_document/lib/partiduo-document \
+		aloli-partiduo:partiduo-einvoicing:fab428d0a7b8a9b1b7d794d6ab47bfdb1a3afdd9:partiduo_einvoicing/lib/partiduo-einvoicing \
+		aloli-partiduo:partiduo-esalink:dd903dcf59d5afd7bc3e269fed44792670f86a9d:partiduo_esalink/lib/partiduo-esalink \
+		aloli-partiduo:partiduo-form:1482304f8bcfd950a50de02a9c28b2caeff9f0e0:partiduo_form/lib/partiduo-form \
+		aloli-partiduo:partiduo-import:e1a521248c3e120c3404b8785fc0e77bf1b5b7bd:partiduo_import/lib/partiduo-import \
+		aloli-partiduo:partiduo-modeles:fd8837a8e466a6a5b5762eddac22111a360a4091:partiduo_modeles/lib/partiduo-modeles \
+		aloli-partiduo:partiduo-perso:0d3d21b9fccb3dcef3dd18d0a627d44029cde6ba:partiduo_perso/lib/partiduo-perso \
+		aloli-partiduo:partiduo-reports:5b30e899116eeae35fb8fdf4ec5f52720de7cb7d:partiduo_reports/lib/partiduo-reports \
+		aloli-partiduo:partiduo-sepa:3c961e56cba93fbf10255fa80db86a452bfa77f8:partiduo_sepa/lib/partiduo-sepa \
+		aloli-partiduo:partiduo-superpdp:e6e8cc9ef3459142f4c930552d6e379a18886a10:partiduo_superpdp/lib/partiduo-superpdp \
+		aloli-partiduo:partiduo-teledec:7aa6471187fb1d9b226e8c669f17f5a875626e26:partiduo_teledec/lib/partiduo-teledec \
+		aloli-partiduo:partiduo-ui-bulma:7cdcf895c0482326ca67214e05074491f703e702:partiduo_ui_bulma/lib/partiduo-ui-bulma \
+		aloli-partiduo:partiduo-urssaf:dcfc87b96ccd4c636752e045d817f8b3b11e421b:partiduo_urssaf/lib/partiduo-urssaf \
 		aloli-crystal:password-policy:2d41f8421f94f70c373b4be3b39f4011d09c7424:password_policy/lib/password-policy \
 		aloli-crystal:pdf:8f24399eaa54c6510376e1b8e0e6fb0a455de10d:pdf/lib/pdf \
 		aloli-crystal:pdf-a:d205ecd704fd75528a24d6ecf3e062c907230ea4:pdf_a/lib/pdf-a \
