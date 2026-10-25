@@ -32,6 +32,9 @@
 #     Tools/shards-tuples aloli-partiduo/partiduo-admin <commit> finance/partiduo-admin-devel
 # L'archive principale reste celle du projet au COMMIT donné.
 #
+# SHARDS_TUPLES_DIST_SUBDIR=NOM : sous-répertoire des archives (DIST_SUBDIR du
+# port), « partiduo » par défaut ; un port hors Partiduo passe le sien.
+#
 # Seuls git, curl, awk et sha256sum (ou shasum, ou sha256) sont requis :
 # l'outil tourne sur un poste de développement comme sur la machine de
 # construction.
@@ -55,7 +58,7 @@ esac
 
 ACCOUNT="${REPO%%/*}"
 PROJECT="${REPO#*/}"
-DIST_SUBDIR=partiduo
+DIST_SUBDIR="${SHARDS_TUPLES_DIST_SUBDIR:-partiduo}"
 CACHE="${SHARDS_TUPLES_CACHE:-$HOME/.cache/aloli-freebsd-ports/distfiles}/$DIST_SUBDIR"
 mkdir -p "$CACHE"
 
