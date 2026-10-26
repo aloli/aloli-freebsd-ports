@@ -1,6 +1,6 @@
 # Produit par Tools/shards-tuples (aloli-partiduo/partiduo-admin, finance/partiduo-admin-devel/shard.lock.packaging) — ne pas modifier à la main.
-DISTVERSION=	0.1.57
-GH_TAGNAME=	ca1d4f90625ed5817f07c5c702371e7c5d842b8a
+DISTVERSION=	0.1.64
+GH_TAGNAME=	e8a24488e8f9bc9c12f90e29a5f4bb0a8d094177
 GH_TUPLE=	\
 		aloli-crystal:api-ovh:4f62ed0c30d49414d90954c52d3d473dd634db1c:api_ovh/lib/api-ovh \
 		aloli-crystal:authn:be98021bf0da7c8fd8306b3d715e425aec5e7aa3:authn/lib/authn \
