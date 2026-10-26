@@ -1,8 +1,8 @@
-crystal-clevis-zfs unlocks ZFS natively encrypted datasets at boot without
+clevis-zfs unlocks ZFS natively encrypted datasets at boot without
 an operator, by the Tang protocol (Network-Bound Disk Encryption): the
 dataset key is bound to one or several Tang servers (Shamir secret sharing,
 threshold K of N) and recovered at boot as long as enough of them answer.
 A stolen disk, away from that network, stays locked.
 
-The rc.d script crystal_clevis_zfs runs after the network is up and unlocks,
-then mounts, the datasets listed in crystal_clevis_zfs_datasets.
+The rc.d script clevis_zfs runs after the network is up and unlocks,
+then mounts, the datasets listed in clevis_zfs_datasets.

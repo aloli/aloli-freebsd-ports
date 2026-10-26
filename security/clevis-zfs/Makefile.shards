@@ -1,6 +1,6 @@
 # Produit par Tools/shards-tuples (aloli-crystal/clevis-zfs, shard.lock) — ne pas modifier à la main.
-DISTVERSION=	0.2.6
-GH_TAGNAME=	c0c9f295639e6234df9fc2c97435968ea1b88bc5
+DISTVERSION=	0.2.7
+GH_TAGNAME=	8b33f6b6bcdb43246b5862fa5bfeb8f1c15a71be
 GH_TUPLE=	\
 		crystal-ameba:ameba:9a19f5f98abdf792a5a0ef6ca5c5d89459740e2f:ameba/lib/ameba \
 		aloli-crystal:jose:ae6fc12bfc876ba8dbcb4b4e3e6342f732ff5503:jose/lib/jose

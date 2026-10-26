@@ -1,6 +1,6 @@
-TIMESTAMP = 1792964504
-SHA256 (aloli-crystal/aloli-crystal-clevis-zfs-0.2.6-c0c9f295639e6234df9fc2c97435968ea1b88bc5_GH0.tar.gz) = 15552b655e5d4f7c97aad19db74eb6c18da1a6b6c62d6ff2dc1a11946563dda6
-SIZE (aloli-crystal/aloli-crystal-clevis-zfs-0.2.6-c0c9f295639e6234df9fc2c97435968ea1b88bc5_GH0.tar.gz) = 38817
+TIMESTAMP = 1792996274
+SHA256 (aloli-crystal/aloli-crystal-clevis-zfs-0.2.7-8b33f6b6bcdb43246b5862fa5bfeb8f1c15a71be_GH0.tar.gz) = f30c6ff60e199edf82608d43e2e281b5ca554116547c2fe48e50ec54d05a87b3
+SIZE (aloli-crystal/aloli-crystal-clevis-zfs-0.2.7-8b33f6b6bcdb43246b5862fa5bfeb8f1c15a71be_GH0.tar.gz) = 38969
 SHA256 (aloli-crystal/crystal-ameba-ameba-9a19f5f98abdf792a5a0ef6ca5c5d89459740e2f_GH0.tar.gz) = 6f62648a4ec42ae4ff30c8cb233b0e1b137192017d49449ca0512f75f3aea68e
 SIZE (aloli-crystal/crystal-ameba-ameba-9a19f5f98abdf792a5a0ef6ca5c5d89459740e2f_GH0.tar.gz) = 200913
 SHA256 (aloli-crystal/aloli-crystal-jose-ae6fc12bfc876ba8dbcb4b4e3e6342f732ff5503_GH0.tar.gz) = b9aa12b0eaabe986aafe336bcafb2e157936200d1e7e2f70fdcf80c092b11d3c

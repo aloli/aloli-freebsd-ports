@@ -1,4 +1,4 @@
-PORTNAME=	crystal-clevis-zfs
+PORTNAME=	clevis-zfs
 CATEGORIES=	security
 DIST_SUBDIR=	aloli-crystal
 
@@ -24,24 +24,24 @@ GH_PROJECT=	clevis-zfs
 # SHARDS_TUPLES_DIST_SUBDIR=aloli-crystal).
 .include "${.CURDIR}/Makefile.shards"
 
-PLIST_FILES=	etc/rc.d/crystal_clevis_zfs \
-		sbin/crystal-clevis-zfs
+PLIST_FILES=	etc/rc.d/clevis_zfs \
+		sbin/clevis-zfs
 
 _CLEVIS_ENV=	HOME=${WRKDIR} \
 		CRYSTAL_CACHE_DIR=${WRKDIR}/crystal-cache
 
 # Script rc.d du projet : chemins en /usr/local, ramenés au PREFIX.
 post-patch:
-	${REINPLACE_CMD} 's|/usr/local|${PREFIX}|g' ${WRKSRC}/etc/rc.d/crystal-clevis-zfs
+	${REINPLACE_CMD} 's|/usr/local|${PREFIX}|g' ${WRKSRC}/etc/rc.d/clevis_zfs
 
 do-build:
 	${MKDIR} ${WRKSRC}/bin
 	cd ${WRKSRC} && ${SETENV} ${_CLEVIS_ENV} crystal build --release --no-debug \
-		-o bin/crystal-clevis-zfs src/cli.cr
+		-o bin/clevis-zfs src/cli.cr
 
 do-install:
-	${INSTALL_PROGRAM} ${WRKSRC}/bin/crystal-clevis-zfs ${STAGEDIR}${PREFIX}/sbin
-	${INSTALL_SCRIPT} ${WRKSRC}/etc/rc.d/crystal-clevis-zfs \
-		${STAGEDIR}${PREFIX}/etc/rc.d/crystal_clevis_zfs
+	${INSTALL_PROGRAM} ${WRKSRC}/bin/clevis-zfs ${STAGEDIR}${PREFIX}/sbin
+	${INSTALL_SCRIPT} ${WRKSRC}/etc/rc.d/clevis_zfs \
+		${STAGEDIR}${PREFIX}/etc/rc.d/clevis_zfs
 
 .include <bsd.port.mk>
