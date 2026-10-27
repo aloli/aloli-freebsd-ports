@@ -6,5 +6,6 @@ extensions, each enabled per instance, with the PDF converter of the
 MODELES extension.
 
 Several instances run on one server, one daemon each, under
-/usr/local/etc/rc.d/partiduo. The development version (partiduo-app-devel)
-installs in its own directory and can run alongside.
+/usr/local/etc/rc.d/partiduo_app (formerly partiduo; its rc.conf settings
+are renamed on upgrade). The development version (partiduo-app-devel)
+installs in the same locations and conflicts with it.

@@ -15,4 +15,20 @@ Le PDF des modèles AsciiDoc et Markdown : PARTIDUO_MODELES_PDF=auto dans
 la configuration de l'instance.
 EOM
 }
+{ type: upgrade
+  message: <<EOM
+Relancez les instances une fois tous les paquets à jour ; le script rc.d
+passe d'abord leurs migrations :
+
+  service %%PARTIDUO_RC%% restart
+
+Le script rc.d s'appelait partiduo (réglages partiduo_enable,
+partiduo_instances…) : à cette mise à jour, ses réglages de rc.conf ont été
+recopiés en %%PARTIDUO_RC%%_* (voir les lignes affichées plus haut, s'il y en
+avait). Les instances lancées sous l'ancien nom s'arrêtent et se relancent
+par « service %%PARTIDUO_RC%% restart » (même pidfile). L'exécutant
+(partiduo-agent ou partiduo-agent-devel) doit être assez récent pour piloter
+%%PARTIDUO_RC%% : mettez-le à jour avant ou avec ce paquet.
+EOM
+}
 ]

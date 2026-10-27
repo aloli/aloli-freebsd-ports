@@ -1,13 +1,107 @@
 #!/bin/sh
-# Compte système des serveurs Partiduo, partagé par partiduo-app et
-# partiduo-app-devel (identifiant attribué par pw : l'overlay aloli-freebsd-ports
-# ne réserve pas d'entrée dans les fichiers UIDs/GIDs de l'arbre des ports).
-[ "$2" = "PRE-INSTALL" ] || exit 0
-if ! pw groupshow partiduo >/dev/null 2>&1; then
-	pw groupadd partiduo || exit 1
-fi
-if ! pw usershow partiduo >/dev/null 2>&1; then
-	pw useradd partiduo -g partiduo -c "Partiduo" -d /nonexistent \
-		-s /usr/sbin/nologin || exit 1
-fi
+# PRE-INSTALL : compte système des serveurs Partiduo, partagé par
+# partiduo-app et partiduo-app-devel (identifiant attribué par pw : l'overlay
+# aloli-freebsd-ports ne réserve pas d'entrée dans les fichiers UIDs/GIDs de
+# l'arbre des ports).
+#
+# POST-INSTALL : passage du script rc.d partiduo à partiduo_app (PARTIDUO_RC
+# du Makefile, D-PKG-013 de partiduo-app). Les réglages partiduo_<réglage>
+# de rc.conf, rc.conf.local et rc.conf.d/partiduo sont recopiés en
+# partiduo_app_<réglage>, puis retirés. Sans ancien réglage, rien n'est fait
+# ni affiché : le passage se rejoue sans effet à chaque mise à jour. Les
+# instances ne sont pas relancées ici (d'autres paquets de la même opération
+# peuvent ne pas être encore à jour) : pkg-message le demande.
+
+_old=partiduo
+_new=partiduo_app
+
+# Réglages de l'ancien service dans le fichier $1 : partiduo_<réglage>, hors
+# des autres services Partiduo (partiduo_admin_*, partiduo_agent_*,
+# partiduo_connect_*), du nouveau (partiduo_app_*) et de l'ancien
+# partiduo_devel_* (D-PKG-001), qui n'est pas ce service.
+old_settings()
+{
+	sed -n "s/^[[:space:]]*\(${_old}_[A-Za-z0-9_]*\)=.*/\1/p" "$1" |
+	    grep -Ev "^${_old}_(admin|agent|connect|app|devel)_" | sort -u
+}
+
+# Recopie les réglages de l'ancien service de $1 dans $2, puis les retire
+# de $1. Un réglage déjà présent sous le nouveau nom l'emporte : l'ancien
+# est retiré, sa valeur affichée.
+migrate_settings()
+{
+	_from="$1"
+	_to="$2"
+	for _var in $(old_settings "${_from}"); do
+		_setting="${_var#${_old}_}"
+		_value=$(sysrc -f "${_from}" -n "${_var}") || return 1
+		if [ -f "${_to}" ] &&
+		    grep -Eq "^[[:space:]]*${_new}_${_setting}=" "${_to}"; then
+			echo "  ${_to} : ${_new}_${_setting} déjà réglé ; ${_var}=\"${_value}\" retiré sans être recopié"
+		else
+			sysrc -f "${_to}" "${_new}_${_setting}=${_value}" >/dev/null ||
+			    return 1
+			echo "  ${_to} : ${_var} → ${_new}_${_setting}=\"${_value}\""
+		fi
+		sysrc -f "${_from}" -x "${_var}" || return 1
+		_migrated=1
+	done
+}
+
+case "$2" in
+PRE-INSTALL)
+	if ! pw groupshow partiduo >/dev/null 2>&1; then
+		pw groupadd partiduo || exit 1
+	fi
+	if ! pw usershow partiduo >/dev/null 2>&1; then
+		pw useradd partiduo -g partiduo -c "Partiduo" -d /nonexistent \
+			-s /usr/sbin/nologin || exit 1
+	fi
+	;;
+POST-INSTALL)
+	_migrated=0
+	_status=0
+	for _file in /etc/rc.conf /etc/rc.conf.local; do
+		[ -f "${_file}" ] || continue
+		migrate_settings "${_file}" "${_file}" || _status=1
+	done
+	for _dir in /etc/rc.conf.d /usr/local/etc/rc.conf.d; do
+		if [ -d "${_dir}/${_old}" ]; then
+			echo "${_dir}/${_old} est un répertoire : recopiez ses réglages ${_old}_* en ${_new}_* dans ${_dir}/${_new} (non fait par le paquet)"
+			_status=1
+			continue
+		fi
+		[ -f "${_dir}/${_old}" ] || continue
+		migrate_settings "${_dir}/${_old}" "${_dir}/${_new}" || _status=1
+		# Plus aucune affectation (commentaires seulement) : fichier retiré.
+		if ! grep -Eq '^[[:space:]]*[A-Za-z_][A-Za-z0-9_]*=' "${_dir}/${_old}"; then
+			rm -f "${_dir}/${_old}"
+		fi
+	done
+	if [ "${_migrated}" = 1 ] || [ "${_status}" != 0 ]; then
+		cat <<EOM
+Service rc.d des instances renommé : ${_old} → ${_new} (réglages ci-dessus).
+Les instances qui tournent ont été lancées par l'ancien script ; le nouveau
+les reconnaît (même pidfile, /var/run/partiduo/<instance>.pid). Relancez-les
+sous le nouveau nom, une fois tous les paquets à jour :
+
+  service ${_new} restart
+
+Journaux inchangés (/var/log/partiduo/<instance>.log) ; étiquette syslog
+${_new}-<instance> au lieu de ${_old}-<instance>.
+EOM
+		_helper=/usr/local/libexec/partiduo-agent/partiduo-agent-root
+		if [ -f "${_helper}" ] && ! grep -q "${_new}" "${_helper}"; then
+			cat <<EOM
+
+L'exécutant installé (partiduo-agent ou partiduo-agent-devel) ne connaît
+que l'ancien nom : s'il n'est pas mis à jour dans la même opération, faites-le
+(pkg upgrade), sinon la console ne pilote plus les instances de ce serveur.
+EOM
+		fi
+	fi
+	[ "${_status}" = 0 ] ||
+	    echo "Passage incomplet : voyez les messages ci-dessus et « sysrc -a | grep -E '^${_old}_(enable|instances|account):' »." >&2
+	;;
+esac
 exit 0

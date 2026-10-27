@@ -19,7 +19,14 @@
 #                                     root:partiduo, 640 ;
 #   /var/db/partiduo/<i>              répertoire de travail (pièces jointes) ;
 #   /var/log/partiduo/<i>.log         journal ;
-#   /var/run/partiduo/<i>.pid         processus superviseur (daemon -r).
+#   /var/run/partiduo/<i>.pid         processus superviseur (daemon -r) ;
+#   étiquette syslog                  %%PARTIDUO_RC%%-<i> (daemon -T).
+#
+# Ce script s'appelait partiduo (réglages partiduo_enable,
+# partiduo_instances…) jusqu'à D-PKG-013 de partiduo-app : à la mise à jour
+# du paquet, pkg-install recopie ces réglages en %%PARTIDUO_RC%%_* et retire
+# les anciens. Le pidfile ne porte pas le nom du service : ce script arrête
+# et relance aussi les instances démarrées par l'ancien.
 #
 # Au démarrage, les migrations de l'instance passent d'abord
 # (partiduo-manage migrate) : après une mise à jour du paquet (pkg upgrade,

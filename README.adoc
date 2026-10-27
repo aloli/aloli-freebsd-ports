@@ -89,15 +89,24 @@ test, la version stable sur les serveurs de production.
   deploy/templates/               ses gabarits
 /usr/local/bin/partiduo-manage
 /usr/local/bin/partiduo-provision
-/usr/local/etc/rc.d/partiduo
+/usr/local/etc/rc.d/partiduo_app
 ----
 
 Tout ce qu'un programme lit à l'exécution est rangé à côté de lui : il n'a
 besoin d'aucun réglage pour savoir quelle version il est. Les instances sont
-déclarées dans `partiduo_instances` (`rc.conf`) ; configuration
+déclarées dans `partiduo_app_instances` (`rc.conf`) ; configuration
 `/usr/local/etc/partiduo/<instance>.env`, données `/var/db/partiduo/<instance>`,
 journal `/var/log/partiduo/<instance>.log`. Le compte `partiduo` est créé à
 l'installation s'il n'existe pas.
+
+Le script `rc.d` s'appelait `partiduo` jusqu'à `PORTREVISION` 4 ; il porte
+le nom du dépôt, comme `partiduo_admin`, `partiduo_agent` et
+`partiduo_connect` (D-PKG-013 de partiduo-app). À la mise à jour,
+`pkg-install` recopie les réglages `partiduo_*` de `rc.conf` (et de
+`rc.conf.d/partiduo`) en `partiduo_app_*` et retire les anciens ;
+`service partiduo_app restart` relance ensuite les instances, pidfiles
+inchangés. L'exécutant (`partiduo-agent`) se met à jour d'abord : ses
+enveloppes pilotent les deux noms.
 
 === Administration et exécutant
 

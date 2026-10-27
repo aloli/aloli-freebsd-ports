@@ -1,5 +1,5 @@
 PORTNAME=	partiduo-app
-PORTREVISION=	4
+PORTREVISION=	5
 CATEGORIES=	finance
 DIST_SUBDIR=	partiduo
 
@@ -33,7 +33,12 @@ CONFLICTS_INSTALL?=	partiduo-app-devel
 # Tout ce qu'un programme lit à l'exécution est rangé à côté de lui (bin/,
 # share/).
 PARTIDUO_NAME=	partiduo
-PARTIDUO_RC=	partiduo
+# Script rc.d : partiduo_app, nommé comme le dépôt, à côté de partiduo_admin,
+# partiduo_agent et partiduo_connect (D-PKG-013 de partiduo-app) ; il
+# s'appelait partiduo, et pkg-install recopie ses réglages de rc.conf à la
+# mise à jour. Chemins (lib/partiduo, /var/db/partiduo, /var/run/partiduo…)
+# et commandes (partiduo-manage, partiduo-provision) inchangés.
+PARTIDUO_RC=	partiduo_app
 PARTIDUO_HOME=	${PREFIX}/lib/${PARTIDUO_NAME}
 
 SUB_FILES=	partiduo-rc pkg-message
