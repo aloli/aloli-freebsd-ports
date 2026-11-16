@@ -1,0 +1,14 @@
+jawas is a backup tool for databases, in the spirit of automysqlbackup:
+one compressed dump per database, rotated in daily, weekly and monthly
+series.
+
+- engines: MySQL and MariaDB (mysqldump), PostgreSQL (pg_dump, plain or
+  custom format, plus roles through pg_dumpall), SQLite (consistent hot
+  copy or SQL dump); several servers in one configuration
+- weekly and monthly copies are hard links of the daily dump; retention
+  in days per period with a keep_min floor
+- streaming compression: gzip, pigz, bzip2, xz or zstd
+- atomic writes, SHA-256 sidecar files, 0600 files, no clear-text
+  password in the configuration nor on the command line
+- dry-run by default (--apply to act), lock, pre/post hooks, JSON report
+  and monitoring-friendly exit codes

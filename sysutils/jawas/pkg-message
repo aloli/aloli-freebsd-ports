@@ -1,0 +1,21 @@
+[
+{ type: install
+  message: <<EOM
+jawas reads /usr/local/etc/jawas/config.toml (template installed as
+config.toml.sample). Install the dump tools of the engines you back up:
+
+  mysql84-client or mariadb114-client   (mysqldump / mariadb-dump)
+  postgresql18-client                   (pg_dump, pg_dumpall, psql)
+  sqlite3                               (sqlite3)
+
+then check and schedule it:
+
+  jawas check
+  jawas backup                  # dry-run
+  printf '%s\n' 'PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin' \
+    '15 3 * * * root jawas backup --apply --quiet' > /usr/local/etc/cron.d/jawas
+
+(cron's default PATH lacks /usr/local/bin, where the dump tools live).
+EOM
+}
+]
