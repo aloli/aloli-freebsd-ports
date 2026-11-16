@@ -20,6 +20,13 @@ esclave de `databases/postgresql18-server`) : ni `llvm19` ni Python sur les
 serveurs. Nom distinct du paquet officiel `postgresql18-server`, avec
 lequel il est en conflit ; client officiel `postgresql18-client`.
 
+|`devel/crystalize`
+|`crystalize`
+|Empaquette une application Ruby (Rails) en un exécutable unique ; outil
+de construction des ports produits par `crystalize port` (sources de
+l'application récupérées sur le builder avant le bulk, avec une clé de
+déploiement posée par beryl). Source : `aloli-crystal/crystalize`.
+
 |`finance/partiduo-app`
 |`partiduo-app`
 |Serveur d'instance Partiduo : cœur, interface, toutes les extensions,
@@ -50,6 +57,21 @@ enveloppes de sudo et leurs règles. Même source que `partiduo-admin`.
 |`sysutils/partiduo-agent-devel`
 |`partiduo-agent-devel`
 |Même chose, branche `development` (port esclave).
+
+|`sysutils/jawas`
+|`jawas`
+|Sauvegarde des bases MySQL/MariaDB, PostgreSQL et SQLite (réinterprétation
+d'automysqlbackup) : un dump compressé par base, séries quotidienne,
+hebdomadaire et mensuelle, sommes SHA-256. Configuration
+`/usr/local/etc/jawas/config.toml` (modèle `config.toml.sample`) ; les
+outils de dump de chaque moteur sont à installer sur le serveur
+(`pkg-message`). Source : `aloli-crystal/jawas`.
+
+|`security/clevis-zfs`
+|`clevis-zfs`
+|Client Tang : déverrouillage sans opérateur, au démarrage, des datasets
+ZFS chiffrés (script rc.d `clevis_zfs`, liaison par `beryl tang-enroll`).
+Source : `aloli-crystal/clevis-zfs`.
 
 |`security/partiduo-connect`
 |`partiduo-connect`

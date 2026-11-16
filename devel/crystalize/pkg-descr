@@ -1,0 +1,9 @@
+crystalize packages a Ruby (Rails) application, taken from a git branch,
+into a single executable: Crystal launcher, relocatable Ruby, gems and the
+application code precompiled to YARV bytecode. Secrets stay outside the
+binary (age-encrypted YAML), so does the database; Active Storage files
+are kept clear or encrypted on disk.
+
+`crystalize port` writes a FreeBSD port of the application, built by
+poudriere from public distfiles (Ruby, gems) and from the private
+application sources fetched on the builder before the bulk.

@@ -1,0 +1,5 @@
+# Produit par Tools/shards-tuples (aloli-crystal/crystalize, shard.lock) — ne pas modifier à la main.
+DISTVERSION=	0.1.1
+GH_TAGNAME=	5a11818e338c19893b78febb12ea11d914cdb0db
+GH_TUPLE=	\
+		crystal-ameba:ameba:9a19f5f98abdf792a5a0ef6ca5c5d89459740e2f:ameba/lib/ameba
