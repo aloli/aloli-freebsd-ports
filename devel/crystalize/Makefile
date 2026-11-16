@@ -14,7 +14,7 @@ BUILD_DEPENDS=	crystal:lang/crystal
 # FreeBSD, yaml pour les configurations) ; OpenSSL : système de base.
 LIB_DEPENDS=	libgc-threaded.so:devel/boehm-gc-threaded \
 		libpcre2-8.so:devel/pcre2 \
-		libyaml-0.so:textproc/libyaml
+		libyaml.so:textproc/libyaml
 # `crystalize build` extrait la branche de l'application par git ; les
 # ports produits par `crystalize port` n'en ont pas besoin (--from-dist).
 RUN_DEPENDS=	git:devel/git
