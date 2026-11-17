@@ -8,6 +8,15 @@ config.toml.sample). Install the dump tools of the engines you back up:
   postgresql18-client                   (pg_dump, pg_dumpall, psql)
   sqlite3                               (sqlite3)
   age                                   (only with [encryption])
+  rclone                                (only with a [[remote]] of type rclone)
+
+On a host that receives backups over ssh ([[remote]] of type ssh), no
+configuration is needed: give the sender's key a forced command in
+~/.ssh/authorized_keys:
+
+  command="jawas receive -S /srv/jawas/web1 --apply",restrict ssh-ed25519 AAAA...
+
+and rotate there with: jawas prune -S /srv/jawas/web1 --apply
 
 then check and schedule it:
 

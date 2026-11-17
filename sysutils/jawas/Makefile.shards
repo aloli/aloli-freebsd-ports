@@ -1,6 +1,6 @@
 # Produit par Tools/shards-tuples (aloli-crystal/jawas, shard.lock) — ne pas modifier à la main.
-DISTVERSION=	0.3.0
-GH_TAGNAME=	4ad93abc6291250cc9e19b14e0830df212a9355b
+DISTVERSION=	0.4.0
+GH_TAGNAME=	e489ec30a08de42851a86169caca69fecbf414a3
 GH_TUPLE=	\
 		crystal-ameba:ameba:9a19f5f98abdf792a5a0ef6ca5c5d89459740e2f:ameba/lib/ameba \
 		aloli-crystal:toml:3cd645c67b83ce5b055bb0ae041d68fc354c7281:toml/lib/toml
