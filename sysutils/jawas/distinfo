@@ -1,6 +1,6 @@
-TIMESTAMP = 1794902655
-SHA256 (aloli-crystal/aloli-crystal-jawas-0.4.0-e489ec30a08de42851a86169caca69fecbf414a3_GH0.tar.gz) = 93912dc4a47fa81bc72b50dee3a1fc6adfc3b03d3e1459635e65373acaa26636
-SIZE (aloli-crystal/aloli-crystal-jawas-0.4.0-e489ec30a08de42851a86169caca69fecbf414a3_GH0.tar.gz) = 64414
+TIMESTAMP = 1794932291
+SHA256 (aloli-crystal/aloli-crystal-jawas-0.4.1-82e9e645aff6f03c1d0a08537feaec512c5c341c_GH0.tar.gz) = 55688666f7d526ce4b3fcb504359e21a86781eb26ade24871537844c841c9aea
+SIZE (aloli-crystal/aloli-crystal-jawas-0.4.1-82e9e645aff6f03c1d0a08537feaec512c5c341c_GH0.tar.gz) = 68232
 SHA256 (aloli-crystal/crystal-ameba-ameba-9a19f5f98abdf792a5a0ef6ca5c5d89459740e2f_GH0.tar.gz) = 6f62648a4ec42ae4ff30c8cb233b0e1b137192017d49449ca0512f75f3aea68e
 SIZE (aloli-crystal/crystal-ameba-ameba-9a19f5f98abdf792a5a0ef6ca5c5d89459740e2f_GH0.tar.gz) = 200913
 SHA256 (aloli-crystal/aloli-crystal-toml-3cd645c67b83ce5b055bb0ae041d68fc354c7281_GH0.tar.gz) = 367b660387bc40aa68ff3815fd218c4fcfa0004d43522ba5233b91ed4043f8f6
