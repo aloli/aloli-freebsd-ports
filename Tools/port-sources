@@ -1,0 +1,11 @@
+# Ports maison suivis par Tools/port-bump (et le workflow « Port bump ») :
+# un tag vX.Y.Z publié sur le projet met son port à cette version.
+#
+# Une ligne par port : DÉPÔT GITHUB, PORT. Le DIST_SUBDIR des archives est
+# lu dans le Makefile du port.
+#
+# Les ports Partiduo n'y sont pas : canal -devel suivi par commit et lock
+# d'empaquetage (voir README.adoc, « Sources hors ligne »).
+aloli-crystal/clevis-zfs	security/clevis-zfs
+aloli-crystal/crystalize	devel/crystalize
+aloli-crystal/jawas	sysutils/jawas

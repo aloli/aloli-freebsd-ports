@@ -213,6 +213,29 @@ les refuse.
 `SHARDS_TUPLES_LOCK=<fichier>` fait lire un `shard.lock` local au lieu de
 celui du dépôt au commit (l'archive principale reste celle du commit).
 
+=== Logiciels maison suivis par tag : `Tools/port-bump`
+
+Pour les outils publiés par tag (`jawas`, `clevis-zfs`, `crystalize`…),
+la mise à jour du port est automatique. `Tools/port-sources` associe chaque
+dépôt à son port ; le workflow GitHub *Port bump* lance toutes les
+30 minutes `Tools/port-bump --push --all` : un tag `vX.Y.Z` plus récent que
+le `DISTVERSION` du port donne un commit `<port> : version X.Y.Z` (sources
+régénérées par `Tools/shards-tuples`) et le tag suivant de l'overlay,
+poussés sur `production`. Le builder les construit à son passage suivant.
+
+Le tag doit être la `version:` du `shard.yml` à son commit, sinon rien
+n'est commité. Pour suivre un nouveau logiciel, ajoutez une ligne à
+`Tools/port-sources` (port existant, avec `Makefile.shards` et
+`DIST_SUBDIR`). Sans attendre : *Actions → Port bump → Run workflow*, ou
+sur le poste :
+
+[source,sh]
+----
+Tools/port-bump -n --all                       # ce qui serait mis à jour
+Tools/port-bump aloli-crystal/jawas            # dernier tag, commit + tag locaux
+Tools/port-bump --push aloli-crystal/jawas v0.4.1
+----
+
 === Lock d'empaquetage : `Tools/packaging-lock`
 
 Depuis le 12 octobre 2026, les dépôts Partiduo déclarent toutes leurs

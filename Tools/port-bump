@@ -1,0 +1,185 @@
+#!/bin/sh
+# SPDX-License-Identifier: BSD-2-Clause
+#
+# port-bump — met les ports maison à la version des tags de leurs projets.
+#
+# Usage :
+#   Tools/port-bump [-n] [--push] --all                 chaque projet de
+#                                                       Tools/port-sources
+#   Tools/port-bump [-n] [--push] COMPTE/PROJET [TAG]   un projet
+#
+# Sans TAG : le dernier tag vX.Y.Z du projet. Le port d'un projet est celui
+# que lui associe Tools/port-sources ; le tag doit être la `version:` du
+# shard.yml à son commit. Pour chaque port en retard (tag plus récent que
+# DISTVERSION) : Tools/shards-tuples (Makefile.shards, distinfo), un commit
+# « <port> : version X.Y.Z » et le tag suivant de l'overlay (dernier
+# chiffre +1, tag léger).
+#
+# -n, --dry-run : affiche seulement ce qui serait mis à jour.
+# --push : pousse la branche courante et les nouveaux tags en une fois
+# (--atomic). Si la branche a avancé entretemps, tout est refait sur la
+# nouvelle tête, trois fois au plus.
+#
+# Rien de nouveau : code 0, sans commit. Réseau : GitHub (git, curl).
+# Lancé depuis n'importe où : travaille à la racine de l'overlay.
+set -eu
+
+die() {
+  echo "port-bump : $*" >&2
+  exit 1
+}
+
+usage="usage : Tools/port-bump [-n] [--push] --all | COMPTE/PROJET [TAG]"
+DRY=0
+PUSH=0
+ALL=0
+while [ $# -gt 0 ]; do
+  case "$1" in
+    -n | --dry-run) DRY=1 ;;
+    --push) PUSH=1 ;;
+    --all) ALL=1 ;;
+    -*) die "$usage" ;;
+    *) break ;;
+  esac
+  shift
+done
+if [ "$ALL" = 1 ]; then
+  [ $# -eq 0 ] || die "$usage"
+else
+  [ $# -eq 1 ] || [ $# -eq 2 ] || die "$usage"
+fi
+[ "$DRY" = 0 ] || [ "$PUSH" = 0 ] || die "-n et --push sont exclusifs"
+
+cd "$(dirname "$0")/.."
+
+# Version numérique pointée valide (1.2.3) ?
+valid() {
+  case "$1" in
+    "" | .* | *. | *..* | *[!0-9.]*) return 1 ;;
+  esac
+}
+
+# $1 plus haute que $2 (comparaison de pkg : nombres, point par point) ?
+newer() {
+  awk -v a="$1" -v b="$2" 'BEGIN {
+    n = split(a, x, "."); m = split(b, y, ".")
+    for (i = 1; i <= (n > m ? n : m); i++) {
+      if (x[i] + 0 > y[i] + 0) exit 0
+      if (x[i] + 0 < y[i] + 0) exit 1
+    }
+    exit 1
+  }'
+}
+
+field() {
+  awk -v k="$1=" '$1 == k { print $2; exit }' "$2"
+}
+
+port_of() {
+  awk -v r="$1" '$1 !~ /^#/ && $1 == r { print $2; exit }' Tools/port-sources
+}
+
+# Dernier tag vX.Y.Z d'un dépôt (vide s'il n'y en a pas).
+latest_tag() {
+  _best=""
+  for _t in $(git ls-remote --tags --refs "https://github.com/$1.git" 'v*' | awk '{ sub("^refs/tags/", "", $2); print $2 }'); do
+    valid "${_t#v}" || continue
+    if [ -z "$_best" ] || newer "${_t#v}" "${_best#v}"; then
+      _best=$_t
+    fi
+  done
+  echo "$_best"
+}
+
+# Commit d'un tag (déréférencé s'il est annoté).
+tag_commit() {
+  _refs=$(git ls-remote "https://github.com/$1.git" "refs/tags/$2" "refs/tags/$2^{}")
+  _sha=$(echo "$_refs" | awk '/\^\{\}$/ { print $1; exit }')
+  [ -n "$_sha" ] || _sha=$(echo "$_refs" | awk 'NF { print $1; exit }')
+  [ ${#_sha} -eq 40 ] || die "tag $2 introuvable sur $1"
+  echo "$_sha"
+}
+
+# Met le port de $1 au tag $2 (vide : dernier tag) s'il est en retard.
+bump() {
+  _repo=$1
+  _port=$(port_of "$_repo")
+  [ -n "$_port" ] || die "$_repo absent de Tools/port-sources"
+  [ -f "$_port/Makefile.shards" ] || die "$_port/Makefile.shards introuvable"
+  _tag=${2:-$(latest_tag "$_repo")}
+  [ -n "$_tag" ] || {
+    echo "== $_port : aucun tag vX.Y.Z sur $_repo"
+    return 0
+  }
+  _version=${_tag#v}
+  if [ "$_tag" = "$_version" ] || ! valid "$_version"; then
+    die "tag vX.Y.Z attendu ($_tag)"
+  fi
+  _current=$(field DISTVERSION "$_port/Makefile.shards")
+  if ! newer "$_version" "$_current"; then
+    echo "== $_port : $_current, tag $_tag — rien à faire"
+    return 0
+  fi
+  if [ "$DRY" = 1 ]; then
+    echo "== $_port : $_current → $_version ($_repo $_tag)"
+    return 0
+  fi
+  _subdir=$(field DIST_SUBDIR "$_port/Makefile")
+  [ -n "$_subdir" ] || die "$_port : DIST_SUBDIR absent du Makefile"
+  _commit=$(tag_commit "$_repo" "$_tag")
+  SHARDS_TUPLES_DIST_SUBDIR=$_subdir Tools/shards-tuples "$_repo" "$_commit" "$_port"
+  _got=$(field DISTVERSION "$_port/Makefile.shards")
+  if [ "$_got" != "$_version" ]; then
+    git checkout -q -- "$_port"
+    die "$_repo : le shard.yml du tag $_tag annonce $_got, pas $_version"
+  fi
+  git add "$_port/Makefile.shards" "$_port/distinfo"
+  git commit -q -m "$(basename "$_port") : version $_version" \
+    -m "Produit par Tools/port-bump depuis le tag $_tag de $_repo ($_commit)."
+  _last=$(git tag -l 'v*' --sort=-v:refname | head -n 1)
+  [ -n "$_last" ] || die "aucun tag vX.Y.Z dans l'overlay"
+  _new="${_last%.*}.$((${_last##*.} + 1))"
+  git tag "$_new"
+  NEW_TAGS="$NEW_TAGS $_new"
+  echo "== $_port : version $_version, commit $(git rev-parse --short HEAD), tag $_new"
+}
+
+run() {
+  NEW_TAGS=""
+  if [ "$ALL" = 1 ]; then
+    # shellcheck disable=SC2013
+    for _r in $(awk '$1 !~ /^#/ && NF { print $1 }' Tools/port-sources); do
+      bump "$_r" ""
+    done
+  else
+    bump "$1" "${2:-}"
+  fi
+}
+
+BRANCH=$(git symbolic-ref --short HEAD)
+if [ "$DRY" = 0 ]; then
+  if ! git diff --quiet || ! git diff --cached --quiet; then
+    die "arbre de travail modifié : commitez ou rangez d'abord"
+  fi
+fi
+tries=0
+while :; do
+  run "$@"
+  if [ -z "$NEW_TAGS" ]; then
+    [ "$DRY" = 1 ] || echo "== rien à publier"
+    exit 0
+  fi
+  [ "$PUSH" = 1 ] || exit 0
+  # shellcheck disable=SC2046
+  if git push --atomic -q origin "HEAD:refs/heads/$BRANCH" $(for t in $NEW_TAGS; do echo "refs/tags/$t"; done); then
+    echo "== poussé : $BRANCH,$NEW_TAGS"
+    exit 0
+  fi
+  tries=$((tries + 1))
+  [ "$tries" -lt 3 ] || die "push refusé trois fois"
+  echo "== $BRANCH a avancé entretemps : nouvel essai"
+  # shellcheck disable=SC2086
+  git tag -d $NEW_TAGS >/dev/null
+  git fetch -q --tags origin "+refs/heads/$BRANCH:refs/remotes/origin/$BRANCH"
+  git reset -q --hard "origin/$BRANCH"
+done

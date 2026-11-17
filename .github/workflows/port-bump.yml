@@ -1,0 +1,51 @@
+# Ports maison à jour des tags de leurs projets (Tools/port-bump).
+#
+# Toutes les 30 minutes, chaque projet de Tools/port-sources est comparé à
+# son port : un tag vX.Y.Z plus récent que DISTVERSION donne un commit
+# « <port> : version X.Y.Z » et un tag de l'overlay, poussés sur
+# production. Le builder les prend à son build suivant.
+#
+# À la main (Actions → Port bump → Run workflow) : tout de suite, pour tous
+# les projets ou pour un seul (tag précis facultatif).
+name: Port bump
+
+on:
+  schedule:
+    - cron: "7,37 * * * *"
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: "Projet (ex. aloli-crystal/jawas) ; vide : tous ceux de Tools/port-sources"
+        required: false
+      tag:
+        description: "Tag (ex. v0.4.2) ; vide : le dernier"
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: port-bump
+  cancel-in-progress: false
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: production
+          fetch-depth: 0
+
+      - name: Tools/port-bump
+        env:
+          REPOSITORY: ${{ inputs.repository }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -n "$REPOSITORY" ]; then
+            Tools/port-bump --push "$REPOSITORY" $TAG
+          else
+            Tools/port-bump --push --all
+          fi
