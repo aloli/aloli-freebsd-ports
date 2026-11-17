@@ -20,6 +20,14 @@ esclave de `databases/postgresql18-server`) : ni `llvm19` ni Python sur les
 serveurs. Nom distinct du paquet officiel `postgresql18-server`, avec
 lequel il est en conflit ; client officiel `postgresql18-client`.
 
+|`databases/postgresql19-server-aloli-devel`
+|`postgresql19-server-aloli-devel`
+|Même chose en PostgreSQL 19, canal `-devel` (serveur de test, avant
+promotion en `postgresql19-server-aloli`). Esclave direct de
+`databases/postgresql19-server`, à la version de l'arbre de poudriere (pré-
+version tant que la branche trimestrielle n'a pas la 19.0) ; client officiel
+`postgresql19-client`.
+
 |`devel/crystalize`
 |`crystalize`
 |Empaquette une application Ruby (Rails) en un exécutable unique ; outil
